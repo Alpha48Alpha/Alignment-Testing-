@@ -202,6 +202,36 @@
       letter-spacing: 0.04em;
     }
 
+    /* ── GitHub Stats ─────────────────────────────────────── */
+    .github-stats {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0 0;
+    }
+
+    .github-stats img {
+      border-radius: 8px;
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* ── Skills ───────────────────────────────────────────── */
+    #skills-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .skills-grid img {
+      height: 28px;
+    }
+
     /* ── Loading / Error ──────────────────────────────────── */
     #status {
       text-align: center;
@@ -228,17 +258,36 @@
 
 <header>
   <img id="avatar" src="" alt="Avatar" />
-  <h1 id="display-name">Alpha48Alpha</h1>
+  <h1>Hello, I'm <span id="display-name">Alpha48Alpha</span>! 👋</h1>
   <p class="bio" id="bio">Loading profile…</p>
   <div class="stats">
     <span><strong id="stat-repos">—</strong> repositories</span>
     <span><strong id="stat-followers">—</strong> followers</span>
     <span><strong id="stat-following">—</strong> following</span>
   </div>
+  <div class="github-stats" id="github-stats"></div>
 </header>
 
 <main>
-  <h2 class="section-title">Featured Repositories</h2>
+  <!-- ── Skills ──────────────────────────────────────────── -->
+  <section id="skills-section">
+    <h2 class="section-title">📚 Skills</h2>
+    <div class="skills-grid">
+      <img src="https://img.shields.io/badge/-Python-3572A5?style=flat-square&logo=python&logoColor=white" alt="Python" />
+      <img src="https://img.shields.io/badge/-JavaScript-f1e05a?style=flat-square&logo=javascript&logoColor=black" alt="JavaScript" />
+      <img src="https://img.shields.io/badge/-TypeScript-3178c6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript" />
+      <img src="https://img.shields.io/badge/-HTML5-e34c26?style=flat-square&logo=html5&logoColor=white" alt="HTML5" />
+      <img src="https://img.shields.io/badge/-CSS3-563d7c?style=flat-square&logo=css3&logoColor=white" alt="CSS3" />
+      <img src="https://img.shields.io/badge/-LLM%20Alignment-58a6ff?style=flat-square&logo=openai&logoColor=white" alt="LLM Alignment" />
+      <img src="https://img.shields.io/badge/-Prompt%20Engineering-8b949e?style=flat-square&logo=chatbot&logoColor=white" alt="Prompt Engineering" />
+      <img src="https://img.shields.io/badge/-AI%20Safety-DA5B0B?style=flat-square&logo=shield&logoColor=white" alt="AI Safety" />
+      <img src="https://img.shields.io/badge/-Markdown-30363d?style=flat-square&logo=markdown&logoColor=white" alt="Markdown" />
+      <img src="https://img.shields.io/badge/-Git-f34b7d?style=flat-square&logo=git&logoColor=white" alt="Git" />
+    </div>
+  </section>
+
+  <!-- ── Featured Projects ────────────────────────────────── -->
+  <h2 class="section-title">🌟 Projects</h2>
   <div id="featured-grid" role="list" aria-label="Featured repositories">
     <article class="featured-card" role="listitem">
       <span class="featured-badge">Featured</span>
@@ -372,9 +421,27 @@
       .replace(/'/g, '&#39;');
   }
 
+  function loadGitHubStats() {
+    const statsEl = document.getElementById('github-stats');
+    const base = 'https://github-readme-stats.vercel.app/api';
+    const params = `theme=radical&hide_border=true&bg_color=0d1117`;
+
+    const statsImg = document.createElement('img');
+    statsImg.src = `${base}?username=${GITHUB_USER}&show_icons=true&${params}`;
+    statsImg.alt = `${GITHUB_USER}'s GitHub Stats`;
+
+    const langsImg = document.createElement('img');
+    langsImg.src = `${base}/top-langs/?username=${GITHUB_USER}&layout=compact&${params}`;
+    langsImg.alt = 'Top Languages';
+
+    statsEl.appendChild(statsImg);
+    statsEl.appendChild(langsImg);
+  }
+
   /* Boot */
   loadProfile();
   loadRepos();
+  loadGitHubStats();
 </script>
 </body>
 </html>
