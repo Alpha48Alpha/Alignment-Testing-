@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alignment — Alpha48Alpha</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d1117;
+      --surface:   #161b22;
+      --border:    #30363d;
+      --accent:    #58a6ff;
+      --text:      #c9d1d9;
+      --muted:     #8b949e;
+      --tag-bg:    #1f2933;
+      --tag-text:  #79c0ff;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── Header ───────────────────────────────────────────── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+
+    header p.subtitle {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    header nav {
+      margin-top: 1rem;
+      font-size: 0.875rem;
+    }
+
+    header nav a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    header nav a:hover { text-decoration: underline; }
+
+    /* ── Main ─────────────────────────────────────────────── */
+    main {
+      max-width: 1100px;
+      margin: 2.5rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── Featured Card ────────────────────────────────────── */
+    .featured-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .featured-card {
+      background: var(--surface);
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      transition: box-shadow 0.2s;
+    }
+
+    .featured-card:hover {
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+
+    .featured-card a.repo-name {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      word-break: break-word;
+    }
+
+    .featured-card a.repo-name:hover { text-decoration: underline; }
+
+    .featured-card .description {
+      color: var(--muted);
+      font-size: 0.875rem;
+      flex: 1;
+    }
+
+    .featured-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--bg);
+      font-size: 0.7rem;
+      font-weight: 700;
+      border-radius: 12px;
+      padding: 1px 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .repo-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .repo-meta .lang-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 3px;
+      background: var(--accent);
+    }
+
+    .tag {
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      border-radius: 12px;
+      padding: 1px 8px;
+      font-size: 0.75rem;
+    }
+
+    /* ── Attachments ──────────────────────────────────────── */
+    .attachments-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .attachment-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .attachment-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
+
+    .attachment-card .attachment-title {
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      word-break: break-word;
+    }
+
+    .attachment-card .attachment-title:hover { text-decoration: underline; }
+
+    .attachment-card .attachment-desc {
+      color: var(--muted);
+      font-size: 0.8rem;
+      flex: 1;
+    }
+
+    .attachment-type {
+      display: inline-block;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      font-size: 0.7rem;
+      font-weight: 600;
+      border-radius: 4px;
+      padding: 1px 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      align-self: flex-start;
+    }
+
+    /* ── Footer ───────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Alignment</h1>
+  <p class="subtitle">LLM alignment research — safety evaluations, robustness tests, and prompt engineering</p>
+  <nav>← <a href="../index.html">Back to portfolio</a></nav>
+</header>
+
+<main>
+  <section class="featured-section">
+    <h2 class="section-title">Repository</h2>
+    <article class="featured-card" role="article">
+      <span class="featured-badge">Featured</span>
+      <a class="repo-name"
+         href="https://github.com/Alpha48Alpha/Alignment"
+         target="_blank" rel="noopener noreferrer">
+        Alignment
+      </a>
+      <p class="description">
+        A dedicated repository for LLM alignment research — safety evaluations,
+        robustness tests, and prompt engineering techniques to improve model
+        reliability and trustworthiness.
+      </p>
+      <div class="repo-meta">
+        <span><span class="lang-dot"></span>Markdown</span>
+        <span class="tag">alignment</span>
+        <span class="tag">llm-safety</span>
+        <span class="tag">prompt-engineering</span>
+      </div>
+    </article>
+  </section>
+
+  <section>
+    <h2 class="section-title">Evaluation Framework</h2>
+    <div class="attachments-grid">
+
+      <div class="attachment-card">
+        <span class="attachment-type">Framework</span>
+        <a class="attachment-title"
+           href="../evaluations/framework.md"
+           target="_blank" rel="noopener noreferrer">
+          evaluations/framework.md
+        </a>
+        <p class="attachment-desc">
+          Full evaluation methodology: scoring rubric (0–3 per dimension), consistency
+          measurement, and aggregate score formula across Accuracy, Reasoning Quality,
+          Instruction Following, Hallucination Rate, and Clarity.
+        </p>
+      </div>
+
+      <div class="attachment-card">
+        <span class="attachment-type">Metrics</span>
+        <a class="attachment-title"
+           href="../evaluations/metrics.md"
+           target="_blank" rel="noopener noreferrer">
+          evaluations/metrics.md
+        </a>
+        <p class="attachment-desc">
+          Definitions and scoring guidance for all five evaluation metrics.
+          Includes the hallucination quality scoring table and the aggregate
+          score formula: sum / (applicable dimensions × 3) × 100%.
+        </p>
+      </div>
+
+      <div class="attachment-card">
+        <span class="attachment-type">Results</span>
+        <a class="attachment-title"
+           href="../evaluations/results/README.md"
+           target="_blank" rel="noopener noreferrer">
+          evaluations/results/README.md
+        </a>
+        <p class="attachment-desc">
+          Summary of evaluation runs across ~500+ prompts. Technical domain: ~200 prompts,
+          68% consistency, 74% accuracy. Educational: ~150 prompts, 71% / 80%.
+          General: ~150 prompts, 72% / 76%. Relative consistency improvement: +35%.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Prompt Sets — Technical Domain</h2>
+    <div class="attachments-grid">
+
+      <div class="attachment-card">
+        <span class="attachment-type">Prompts</span>
+        <a class="attachment-title"
+           href="../prompts/technical/reasoning_quality.md"
+           target="_blank" rel="noopener noreferrer">
+          prompts/technical/reasoning_quality.md
+        </a>
+        <p class="attachment-desc">
+          Reasoning quality test sets: logic and mathematics (train speed, triangular
+          numbers), code reasoning (Python functions), and algorithmic complexity
+          (binary vs. linear search). Each set has three rephrasings.
+        </p>
+      </div>
+
+      <div class="attachment-card">
+        <span class="attachment-type">Prompts</span>
+        <a class="attachment-title"
+           href="../prompts/technical/hallucination_rate.md"
+           target="_blank" rel="noopener noreferrer">
+          prompts/technical/hallucination_rate.md
+        </a>
+        <p class="attachment-desc">
+          Hallucination detection prompts: person biography (Alan Turing), scientific
+          claims (double-slit experiment), citation fabrication, legal references
+          (Section 230), and plausible-but-false historical claims (Tunguska event).
+        </p>
+      </div>
+
+      <div class="attachment-card">
+        <span class="attachment-type">Prompts</span>
+        <a class="attachment-title"
+           href="../prompts/technical/instruction_following.md"
+           target="_blank" rel="noopener noreferrer">
+          prompts/technical/instruction_following.md
+        </a>
+        <p class="attachment-desc">
+          Instruction-following prompts testing format constraints (comma-separated
+          output), length constraints (two-sentence explanations), role constraints
+          (code review), and multi-step task ordering.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Prompt Sets — Educational &amp; General Domains</h2>
+    <div class="attachments-grid">
+
+      <div class="attachment-card">
+        <span class="attachment-type">Prompts</span>
+        <a class="attachment-title"
+           href="../prompts/educational/accuracy.md"
+           target="_blank" rel="noopener noreferrer">
+          prompts/educational/accuracy.md
+        </a>
+        <p class="attachment-desc">
+          Educational accuracy prompts across science (speed of light, mitochondria),
+          history (WWII end date), and language (grammar correction). Each set
+          includes three rephrasings with verified expected answers.
+        </p>
+      </div>
+
+      <div class="attachment-card">
+        <span class="attachment-type">Prompts</span>
+        <a class="attachment-title"
+           href="../prompts/general/clarity.md"
+           target="_blank" rel="noopener noreferrer">
+          prompts/general/clarity.md
+        </a>
+        <p class="attachment-desc">
+          Clarity and readability prompts: common sense (why ice floats), analogical
+          reasoning (CPU explanation for a 10-year-old), ambiguity resolution,
+          geography (largest countries), and plain-language machine learning explanation.
+        </p>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer>
+  Part of the <a href="../index.html">Alpha48Alpha portfolio</a>.
+  View on <a href="https://github.com/Alpha48Alpha/Alignment" target="_blank" rel="noopener">GitHub</a>.
+</footer>
+
+</body>
+</html>
