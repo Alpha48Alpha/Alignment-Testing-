@@ -151,6 +151,47 @@
       font-size: 0.75rem;
     }
 
+    /* ── Projects Section ─────────────────────────────────── */
+    #projects-section {
+      margin-bottom: 3rem;
+    }
+
+    #project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
+
+    .project-card a.project-name {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .project-card a.project-name:hover { text-decoration: underline; }
+
+    .project-card .project-desc {
+      color: var(--muted);
+      font-size: 0.83rem;
+    }
+
     /* ── Loading / Error ──────────────────────────────────── */
     #status {
       text-align: center;
@@ -187,6 +228,24 @@
 </header>
 
 <main>
+  <section id="projects-section">
+    <h2 class="section-title">Projects</h2>
+    <div id="project-grid" role="list" aria-label="Projects">
+      <article class="project-card" role="listitem">
+        <a class="project-name" href="https://github.com/Alpha48Alpha/Alignment-Testing-/tree/main/prompts" target="_blank" rel="noopener">Prompts</a>
+        <p class="project-desc">500+ evaluation prompts spanning technical, educational, and general knowledge domains with multi-variant sets.</p>
+      </article>
+      <article class="project-card" role="listitem">
+        <a class="project-name" href="https://github.com/Alpha48Alpha/Alignment-Testing-/tree/main/evaluations" target="_blank" rel="noopener">Evaluations</a>
+        <p class="project-desc">Scoring metrics, evaluation framework, and results tracking a 35% improvement in response consistency.</p>
+      </article>
+      <article class="project-card" role="listitem">
+        <a class="project-name" href="https://github.com/Alpha48Alpha/Alignment-Testing-/tree/main/prompt-attack-lab" target="_blank" rel="noopener">Prompt Attack Lab</a>
+        <p class="project-desc">Adversarial jailbreak and injection test cases with recommended defense strategies for LLM safety.</p>
+      </article>
+    </div>
+  </section>
+
   <h2 class="section-title">Public Repositories</h2>
   <div id="status">Loading repositories…</div>
   <div id="repo-grid" role="list" aria-label="Repositories"></div>
