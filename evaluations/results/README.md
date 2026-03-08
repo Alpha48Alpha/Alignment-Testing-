@@ -1,0 +1,22 @@
+# Evaluation Results
+
+This directory contains evaluation results for prompt sets in this repository.
+
+Results are organized by domain and evaluation run. Each results file records per-prompt scores across the four dimensions: Reasoning Consistency (RC), Instruction Following (IF), Factual Accuracy (FA), and Output Clarity (OC).
+
+See [../framework.md](../framework.md) for the full evaluation methodology and scoring rubric.
+
+---
+
+## Summary
+
+| Domain | Prompts Evaluated | Avg Consistency Score | Avg Accuracy Score |
+|---|---|---|---|
+| Technical | ~200 | 68% | 74% |
+| Educational | ~150 | 71% | 80% |
+| General Knowledge | ~150 | 72% | 76% |
+| **Total / Overall** | **~500+** | **~70%** | **~76%** |
+
+Baseline consistency (before prompt refinement): ~52%  
+Improved consistency (after prompt refinement): ~70%  
+Relative improvement: **+35%**
