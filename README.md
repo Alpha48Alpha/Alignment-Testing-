@@ -7,12 +7,13 @@
 
 This repository contains **500+ prompts** designed and evaluated across technical, educational, and general knowledge domains, achieving a **35% improvement in response consistency**.
 
-The work focuses on four core areas of model alignment:
+The work focuses on five core LLM evaluation metrics:
 
-- **Reasoning Consistency** — Ensuring models produce logically coherent outputs across varied phrasings of the same question.
-- **Instruction Following** — Verifying that models correctly interpret and execute explicit instructions under diverse conditions.
-- **Factual Accuracy** — Testing that models provide accurate, well-grounded information and avoid hallucination.
-- **Output Clarity** — Evaluating the readability, structure, and directness of model responses.
+- **Accuracy** — Evaluating whether information produced by the model is correct and supported by reliable knowledge.
+- **Reasoning Quality** — Assessing whether the model's reasoning process is clear, coherent, and logically structured.
+- **Instruction Following** — Verifying that models correctly interpret and execute explicit instructions, including format, length, and tone constraints.
+- **Hallucination Rate** — Tracking how often the model generates unsupported or fabricated claims.
+- **Clarity** — Evaluating the readability, structure, and audience-appropriateness of model responses.
 
 ---
 
@@ -28,12 +29,13 @@ The work focuses on four core areas of model alignment:
 
 ## Evaluation Methodology
 
-Each prompt is evaluated against the following criteria:
+Each prompt is evaluated against the following five metrics (see [`evaluations/metrics.md`](evaluations/metrics.md) for full definitions):
 
-1. **Consistency** — Does the model produce the same correct answer when the prompt is rephrased?
-2. **Instruction Adherence** — Does the response follow all explicit constraints and formatting requirements?
-3. **Factual Correctness** — Is the content accurate and free from hallucinated or fabricated information?
-4. **Clarity** — Is the response well-structured, concise, and easy to understand?
+1. **Accuracy** — Is the content factually correct and supported by reliable knowledge?
+2. **Reasoning Quality** — Is the model's reasoning clear, coherent, and logically structured?
+3. **Instruction Following** — Does the response respect all explicit constraints (format, length, tone, audience)?
+4. **Hallucination Rate** — Does the response avoid unsupported or fabricated claims?
+5. **Clarity** — Is the response well-structured, readable, and adapted to the intended audience?
 
 ---
 
@@ -55,5 +57,7 @@ prompts/
   educational/      # Educational domain prompts
   general/          # General knowledge domain prompts
 evaluations/
+  metrics.md        # Definitions for all 5 LLM evaluation metrics
+  framework.md      # Scoring rubric and evaluation methodology
   results/          # Evaluation results and analysis
 ```

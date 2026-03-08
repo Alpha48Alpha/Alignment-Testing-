@@ -2,6 +2,8 @@
 
 This document describes the methodology used to evaluate prompts in this repository.
 
+For the full definition of each metric, see [metrics.md](metrics.md).
+
 ---
 
 ## Scoring Rubric
@@ -19,23 +21,27 @@ Each prompt response is scored on a scale of **0–3** for each applicable dimen
 
 ## Dimensions
 
-### 1. Reasoning Consistency (RC)
-- Does the model produce the same correct answer across equivalent rephrasings?
-- Is the reasoning chain logically coherent?
-- Are intermediate steps correct when shown?
+### 1. Accuracy (AC)
+- Is the core answer factually correct?
+- Are supporting details accurate and well-supported by reliable knowledge?
 
-### 2. Instruction Following (IF)
-- Are all explicit constraints respected (format, length, role, steps)?
+### 2. Reasoning Quality (RQ)
+- Is the reasoning chain logically coherent?
+- Are intermediate steps correct and clearly presented?
+- Does the model reach the correct conclusion through valid reasoning?
+
+### 3. Instruction Following (IF)
+- Are all explicit constraints respected (format, length, tone, audience, role)?
 - Does the response address all parts of the prompt?
 - Are prohibited elements absent from the output?
 
-### 3. Factual Accuracy (FA)
-- Is the core answer factually correct?
-- Are supporting details accurate?
-- Is the response free from hallucinated or fabricated content?
+### 4. Hallucination Rate (HR)
+- Does the response contain unsupported or fabricated claims?
+- Can all factual assertions be verified against a reliable knowledge source?
+- Score 3 (no hallucinations) down to 0 (substantially hallucinated), using the quality score defined in metrics.md.
 
-### 4. Output Clarity (OC)
-- Is the response well-structured?
+### 5. Clarity (CL)
+- Is the response well-structured and easy to follow?
 - Is the language clear and appropriate for the intended audience?
 - Is the response concise without omitting essential information?
 
@@ -46,7 +52,7 @@ Each prompt response is scored on a scale of **0–3** for each applicable dimen
 The aggregate score for a prompt set is computed as:
 
 ```
-Aggregate = (RC + IF + FA + OC) / (number_of_applicable_dimensions * 3) * 100%
+Aggregate = (AC + RQ + IF + HR + CL) / (number_of_applicable_dimensions * 3) * 100%
 ```
 
 ---
