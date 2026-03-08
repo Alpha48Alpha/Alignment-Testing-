@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alpha48Alpha — Portfolio</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d1117;
+      --surface:   #161b22;
+      --border:    #30363d;
+      --accent:    #58a6ff;
+      --text:      #c9d1d9;
+      --muted:     #8b949e;
+      --tag-bg:    #1f2933;
+      --tag-text:  #79c0ff;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── Header ───────────────────────────────────────────── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+
+    header img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid var(--border);
+      margin-bottom: 1rem;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+
+    header p.bio {
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 1rem;
+      font-size: 0.95rem;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .stats span strong {
+      color: var(--text);
+    }
+
+    /* ── Main ─────────────────────────────────────────────── */
+    main {
+      max-width: 1100px;
+      margin: 2.5rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── Repo Grid ────────────────────────────────────────── */
+    #repo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .repo-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .repo-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
+
+    .repo-card a.repo-name {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      word-break: break-word;
+    }
+
+    .repo-card a.repo-name:hover { text-decoration: underline; }
+
+    .repo-card .description {
+      color: var(--muted);
+      font-size: 0.875rem;
+      flex: 1;
+    }
+
+    .repo-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .repo-meta .lang-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 3px;
+      background: var(--accent);
+    }
+
+    .repo-meta .stars::before { content: "⭐ "; }
+    .repo-meta .forks::before { content: "🍴 "; }
+
+    .tag {
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      border-radius: 12px;
+      padding: 1px 8px;
+      font-size: 0.75rem;
+    }
+
+    /* ── Loading / Error ──────────────────────────────────── */
+    #status {
+      text-align: center;
+      color: var(--muted);
+      padding: 3rem 0;
+      font-size: 0.95rem;
+    }
+
+    /* ── Footer ───────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header>
+  <img id="avatar" src="" alt="Avatar" />
+  <h1 id="display-name">Alpha48Alpha</h1>
+  <p class="bio" id="bio">Loading profile…</p>
+  <div class="stats">
+    <span><strong id="stat-repos">—</strong> repositories</span>
+    <span><strong id="stat-followers">—</strong> followers</span>
+    <span><strong id="stat-following">—</strong> following</span>
+  </div>
+</header>
+
+<main>
+  <h2 class="section-title">Public Repositories</h2>
+  <div id="status">Loading repositories…</div>
+  <div id="repo-grid" role="list" aria-label="Repositories"></div>
+</main>
+
+<footer>
+  Portfolio generated automatically from the
+  <a href="https://docs.github.com/en/rest" target="_blank" rel="noopener">GitHub REST API</a>.
+  View source on <a href="https://github.com/Alpha48Alpha/Alignment-Testing-" target="_blank" rel="noopener">GitHub</a>.
+</footer>
+
+<script>
+  const GITHUB_USER = 'Alpha48Alpha';
+  const API_BASE    = 'https://api.github.com';
+
+  /* Color map for common languages */
+  const LANG_COLORS = {
+    JavaScript: '#f1e05a', TypeScript: '#3178c6', Python: '#3572A5',
+    HTML: '#e34c26', CSS: '#563d7c', Shell: '#89e051',
+    'Jupyter Notebook': '#DA5B0B', Go: '#00ADD8', Rust: '#dea584',
+    Java: '#b07219', 'C#': '#178600', 'C++': '#f34b7d',
+    Ruby: '#701516', PHP: '#4F5D95', Swift: '#F05138',
+  };
+
+  async function fetchJSON(url) {
+    const res = await fetch(url, {
+      headers: { Accept: 'application/vnd.github+json' },
+    });
+    if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
+    return res.json();
+  }
+
+  async function loadProfile() {
+    try {
+      const user = await fetchJSON(`${API_BASE}/users/${GITHUB_USER}`);
+      document.getElementById('avatar').src        = user.avatar_url;
+      document.getElementById('display-name').textContent = user.name || user.login;
+      document.getElementById('bio').textContent   = user.bio || '';
+      document.getElementById('stat-repos').textContent      = user.public_repos;
+      document.getElementById('stat-followers').textContent  = user.followers;
+      document.getElementById('stat-following').textContent  = user.following;
+    } catch (err) {
+      console.warn('Could not load profile:', err.message);
+    }
+  }
+
+  async function loadRepos() {
+    const statusEl = document.getElementById('status');
+    const gridEl   = document.getElementById('repo-grid');
+
+    try {
+      /* Fetch up to 100 repos sorted by most recently pushed */
+      const repos = await fetchJSON(
+        `${API_BASE}/users/${GITHUB_USER}/repos?sort=pushed&per_page=100`
+      );
+
+      statusEl.style.display = 'none';
+
+      const sorted = repos
+        .filter(r => !r.fork)              /* hide forks — adjust as needed */
+        .sort((a, b) => b.stargazers_count - a.stargazers_count);
+
+      if (sorted.length === 0) {
+        statusEl.textContent = 'No public repositories found.';
+        statusEl.style.display = 'block';
+        return;
+      }
+
+      sorted.forEach(repo => {
+        const card = document.createElement('article');
+        card.className = 'repo-card';
+        card.setAttribute('role', 'listitem');
+
+        const dotColor = LANG_COLORS[repo.language] || '#8b949e';
+
+        card.innerHTML = `
+          <a class="repo-name" href="${repo.html_url}" target="_blank" rel="noopener">
+            ${escHtml(repo.name)}
+          </a>
+          <p class="description">${escHtml(repo.description || 'No description provided.')}</p>
+          <div class="repo-meta">
+            ${repo.language
+              ? `<span><span class="lang-dot" style="background:${dotColor}"></span>${escHtml(repo.language)}</span>`
+              : ''}
+            ${repo.stargazers_count > 0
+              ? `<span class="stars">${repo.stargazers_count}</span>`
+              : ''}
+            ${repo.forks_count > 0
+              ? `<span class="forks">${repo.forks_count}</span>`
+              : ''}
+            ${repo.topics && repo.topics.length
+              ? repo.topics.slice(0, 3).map(t => `<span class="tag">${escHtml(t)}</span>`).join('')
+              : ''}
+          </div>
+        `;
+        gridEl.appendChild(card);
+      });
+    } catch (err) {
+      statusEl.textContent = `Failed to load repositories: ${err.message}`;
+    }
+  }
+
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  /* Boot */
+  loadProfile();
+  loadRepos();
+</script>
+</body>
+</html>
