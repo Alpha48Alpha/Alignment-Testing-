@@ -152,10 +152,7 @@
     }
 
     /* ── Featured Repos ───────────────────────────────────── */
-    #featured-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.25rem;
+    .featured-section {
       margin-bottom: 2.5rem;
     }
 
@@ -238,10 +235,9 @@
 </header>
 
 <main>
-  <h2 class="section-title">Featured Repositories</h2>
-  <div id="featured-grid" role="list" aria-label="Featured repositories">
-
-    <article class="featured-card" role="listitem">
+  <section class="featured-section">
+    <h2 class="section-title">Alignment</h2>
+    <article class="featured-card" role="article">
       <span class="featured-badge">Featured</span>
       <a class="repo-name"
          href="https://github.com/Alpha48Alpha/Alignment"
@@ -260,8 +256,11 @@
         <span class="tag">prompt-engineering</span>
       </div>
     </article>
+  </section>
 
-    <article class="featured-card" role="listitem">
+  <section class="featured-section">
+    <h2 class="section-title">LLM-Safety</h2>
+    <article class="featured-card" role="article">
       <span class="featured-badge">Featured</span>
       <a class="repo-name"
          href="https://github.com/Alpha48Alpha/LLM-Safety"
@@ -280,8 +279,11 @@
         <span class="tag">guardrails</span>
       </div>
     </article>
+  </section>
 
-    <article class="featured-card" role="listitem">
+  <section class="featured-section">
+    <h2 class="section-title">Prompt-Engineering</h2>
+    <article class="featured-card" role="article">
       <span class="featured-badge">Featured</span>
       <a class="repo-name"
          href="https://github.com/Alpha48Alpha/Prompt-Engineering"
@@ -300,8 +302,7 @@
         <span class="tag">chain-of-thought</span>
       </div>
     </article>
-
-  </div>
+  </section>
 
   <h2 class="section-title">Public Repositories</h2>
   <div id="status">Loading repositories…</div>
