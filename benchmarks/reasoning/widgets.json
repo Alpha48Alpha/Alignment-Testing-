@@ -1,0 +1,52 @@
+[
+  {
+    "id": "widgets-001",
+    "prompt": "A factory produces widgets in batches. Each batch contains 12 widgets. If 5 batches are produced on Monday and 3 batches on Tuesday, how many widgets are produced in total?",
+    "expected_answer": "96",
+    "rubric": {
+      "type": "numeric",
+      "value": 96,
+      "tolerance": 0
+    }
+  },
+  {
+    "id": "widgets-002",
+    "prompt": "A warehouse starts the week with 200 widgets. On Monday, 45 widgets are shipped out and 30 new ones arrive. On Tuesday, 60 widgets are shipped out. How many widgets remain at the end of Tuesday?",
+    "expected_answer": "125",
+    "rubric": {
+      "type": "numeric",
+      "value": 125,
+      "tolerance": 0
+    }
+  },
+  {
+    "id": "widgets-003",
+    "prompt": "Three machines each produce 8 widgets per hour. If all three machines run for 4 hours, then one machine breaks down and the remaining two run for another 2 hours, how many widgets were produced in total?",
+    "expected_answer": "128",
+    "rubric": {
+      "type": "numeric",
+      "value": 128,
+      "tolerance": 0
+    }
+  },
+  {
+    "id": "widgets-004",
+    "prompt": "A quality check rejects 1 in every 10 widgets produced. If a factory produces 150 widgets, how many pass quality control?",
+    "expected_answer": "135",
+    "rubric": {
+      "type": "numeric",
+      "value": 135,
+      "tolerance": 0
+    }
+  },
+  {
+    "id": "widgets-005",
+    "prompt": "Widget production follows this rule: each day's output is double the previous day's output. On Day 1, the factory produces 6 widgets. How many widgets does it produce on Day 4?",
+    "expected_answer": "48",
+    "rubric": {
+      "type": "numeric",
+      "value": 48,
+      "tolerance": 0
+    }
+  }
+]

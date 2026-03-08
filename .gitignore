@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.venv/
+venv/
+env/
+*.env
+
+# Jupyter / IPython
+.ipynb_checkpoints/
+*.ipynb
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Results artifacts
+# Keep named/committed results (e.g., results/widgets_results.json).
+# Ignore timestamped archive copies.
+results/*_2[0-9][0-9][0-9][0-9][0-9][0-9][0-9].json
+
+# Never ignore the results README
+!results/README.md

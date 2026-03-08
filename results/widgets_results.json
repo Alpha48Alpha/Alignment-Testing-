@@ -1,0 +1,54 @@
+{
+  "benchmark": "benchmarks/reasoning/widgets.json",
+  "mode": "mock",
+  "model": "mock",
+  "timestamp": "2026-03-08T14:28:01Z",
+  "summary": {
+    "total": 5,
+    "passed": 5,
+    "failed": 0,
+    "score_pct": 100.0
+  },
+  "items": [
+    {
+      "id": "widgets-001",
+      "prompt": "A factory produces widgets in batches. Each batch contains 12 widgets. If 5 batches are produced on Monday and 3 batches on Tuesday, how many widgets are produced in total?",
+      "response": "The answer is 96.",
+      "expected": "96",
+      "pass": true,
+      "rubric_type": "numeric"
+    },
+    {
+      "id": "widgets-002",
+      "prompt": "A warehouse starts the week with 200 widgets. On Monday, 45 widgets are shipped out and 30 new ones arrive. On Tuesday, 60 widgets are shipped out. How many widgets remain at the end of Tuesday?",
+      "response": "The answer is 125.",
+      "expected": "125",
+      "pass": true,
+      "rubric_type": "numeric"
+    },
+    {
+      "id": "widgets-003",
+      "prompt": "Three machines each produce 8 widgets per hour. If all three machines run for 4 hours, then one machine breaks down and the remaining two run for another 2 hours, how many widgets were produced in total?",
+      "response": "The answer is 128.",
+      "expected": "128",
+      "pass": true,
+      "rubric_type": "numeric"
+    },
+    {
+      "id": "widgets-004",
+      "prompt": "A quality check rejects 1 in every 10 widgets produced. If a factory produces 150 widgets, how many pass quality control?",
+      "response": "The answer is 135.",
+      "expected": "135",
+      "pass": true,
+      "rubric_type": "numeric"
+    },
+    {
+      "id": "widgets-005",
+      "prompt": "Widget production follows this rule: each day's output is double the previous day's output. On Day 1, the factory produces 6 widgets. How many widgets does it produce on Day 4?",
+      "response": "The answer is 48.",
+      "expected": "48",
+      "pass": true,
+      "rubric_type": "numeric"
+    }
+  ]
+}
