@@ -8,15 +8,27 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #0d1117;
-      --surface:   #161b22;
-      --border:    #30363d;
-      --accent:    #58a6ff;
-      --text:      #c9d1d9;
-      --muted:     #8b949e;
-      --tag-bg:    #1f2933;
-      --tag-text:  #79c0ff;
+      --bg:          #0d1117;
+      --surface:     #161b22;
+      --surface-2:   #1c2230;
+      --border:      #30363d;
+      --border-soft: #21262d;
+      --accent:      #58a6ff;
+      --accent-2:    #79c0ff;
+      --accent-3:    #388bfd;
+      --green:       #3fb950;
+      --purple:      #bc8cff;
+      --text:        #e6edf3;
+      --muted:       #8b949e;
+      --tag-bg:      #1f2933;
+      --tag-text:    #79c0ff;
+      --glow:        rgba(88, 166, 255, 0.18);
+      --glow-strong: rgba(88, 166, 255, 0.35);
+      --radius:      12px;
     }
+
+    /* ── Base ─────────────────────────────────────────────── */
+    html { scroll-behavior: smooth; }
 
     body {
       background: var(--bg);
@@ -26,91 +38,335 @@
       min-height: 100vh;
     }
 
-    /* ── Header ───────────────────────────────────────────── */
+    /* ── Hero / Header ────────────────────────────────────── */
     header {
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      padding: 4rem 1.5rem 3rem;
       background: var(--surface);
       border-bottom: 1px solid var(--border);
-      padding: 2rem 1.5rem;
-      text-align: center;
     }
 
-    header img {
-      width: 100px;
-      height: 100px;
+    /* Animated mesh gradient background */
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 40%, rgba(56, 139, 253, 0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 80% 20%, rgba(188, 140, 255, 0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 60% 80%, rgba(63, 185, 80, 0.07) 0%, transparent 55%);
+      animation: meshShift 14s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    /* Subtle dot-grid overlay */
+    header::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+    }
+
+    @keyframes meshShift {
+      0%   { opacity: 0.8; transform: scale(1)    translateY(0); }
+      100% { opacity: 1;   transform: scale(1.06) translateY(-10px); }
+    }
+
+    /* Avatar ring */
+    .avatar-wrap {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 1.25rem;
+      z-index: 1;
+    }
+
+    .avatar-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
       border-radius: 50%;
-      border: 3px solid var(--border);
-      margin-bottom: 1rem;
+      background: conic-gradient(from 0deg, var(--accent), var(--purple), var(--green), var(--accent));
+      animation: spin 5s linear infinite;
+      z-index: -1;
     }
 
+    .avatar-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, var(--accent), var(--purple), var(--green), var(--accent));
+      filter: blur(10px);
+      opacity: 0.5;
+      animation: spin 5s linear infinite;
+      z-index: -2;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    #avatar {
+      display: block;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 3px solid var(--bg);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Name */
     header h1 {
-      font-size: 1.8rem;
-      color: var(--accent);
-      margin-bottom: 0.3rem;
+      position: relative;
+      z-index: 1;
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 50%, var(--purple) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     header p.bio {
+      position: relative;
+      z-index: 1;
       color: var(--muted);
-      max-width: 600px;
-      margin: 0 auto 1rem;
-      font-size: 0.95rem;
+      max-width: 560px;
+      margin: 0 auto 1.75rem;
+      font-size: 0.975rem;
+      line-height: 1.65;
     }
 
+    /* Stats strip */
     .stats {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-      font-size: 0.9rem;
-      color: var(--muted);
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      gap: 0;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      overflow: hidden;
     }
+
+    .stats span {
+      padding: 0.45rem 1.4rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      border-right: 1px solid var(--border);
+    }
+
+    .stats span:last-child { border-right: none; }
 
     .stats span strong {
+      display: block;
+      font-size: 1.1rem;
+      font-weight: 700;
       color: var(--text);
+      line-height: 1.2;
     }
 
     /* ── Main ─────────────────────────────────────────────── */
     main {
       max-width: 1100px;
-      margin: 2.5rem auto;
+      margin: 3rem auto;
       padding: 0 1.5rem;
     }
 
+    /* Section titles */
     .section-title {
-      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.05rem;
+      font-weight: 600;
       color: var(--text);
       margin-bottom: 1.25rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid var(--border);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
     }
 
-    /* ── Repo Grid ────────────────────────────────────────── */
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--border), transparent);
+    }
+
+    .section-title .title-icon {
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
+    /* ── Featured sections ────────────────────────────────── */
+    .featured-sections-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3.5rem;
+    }
+
+    /* Gradient-border card wrapper trick */
+    .featured-card-wrap {
+      position: relative;
+      border-radius: calc(var(--radius) + 1px);
+      background: linear-gradient(135deg, var(--accent), var(--purple) 60%, var(--green));
+      padding: 1px;
+      transition: box-shadow 0.3s;
+    }
+
+    .featured-card-wrap:hover {
+      box-shadow: 0 0 28px var(--glow-strong), 0 0 8px var(--glow);
+    }
+
+    .featured-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      height: 100%;
+      transition: background 0.2s;
+    }
+
+    .featured-card-wrap:hover .featured-card {
+      background: var(--surface-2);
+    }
+
+    .featured-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .featured-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: linear-gradient(135deg, var(--accent-3), var(--accent));
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 2px 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    .featured-badge::before { content: '✦'; font-size: 0.55rem; }
+
+    .featured-card a.repo-name {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.05rem;
+      word-break: break-word;
+      transition: color 0.2s;
+    }
+
+    .featured-card a.repo-name:hover { color: var(--accent); }
+
+    .featured-card .description {
+      color: var(--muted);
+      font-size: 0.86rem;
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .repo-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.1rem;
+    }
+
+    .repo-meta .lang-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 3px;
+      flex-shrink: 0;
+      background: var(--accent);
+    }
+
+    .repo-meta .stars::before { content: "★ "; color: #e3b341; }
+    .repo-meta .forks::before { content: "⑂ "; }
+
+    .tag {
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      border-radius: 999px;
+      padding: 2px 10px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      border: 1px solid rgba(121, 192, 255, 0.15);
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .tag:hover {
+      background: rgba(88, 166, 255, 0.12);
+      border-color: rgba(121, 192, 255, 0.4);
+    }
+
+    .view-link {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: 0.25rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      transition: gap 0.2s, color 0.2s;
+    }
+
+    .view-link:hover { gap: 0.55rem; color: var(--accent-2); }
+    .view-link::after { content: '→'; }
+
+    /* ── Public repo grid ─────────────────────────────────── */
     #repo-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.25rem;
+      gap: 1.1rem;
     }
 
     .repo-card {
       background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
       padding: 1.25rem;
       display: flex;
       flex-direction: column;
-      gap: 0.6rem;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      gap: 0.55rem;
+      transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+      will-change: transform;
     }
 
     .repo-card:hover {
       border-color: var(--accent);
-      box-shadow: 0 0 0 1px var(--accent);
+      box-shadow: 0 0 0 1px var(--accent), 0 8px 24px rgba(0,0,0,0.4);
+      transform: translateY(-3px);
     }
 
     .repo-card a.repo-name {
       color: var(--accent);
       text-decoration: none;
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 0.95rem;
       word-break: break-word;
     }
 
@@ -118,89 +374,50 @@
 
     .repo-card .description {
       color: var(--muted);
-      font-size: 0.875rem;
+      font-size: 0.84rem;
+      line-height: 1.55;
       flex: 1;
     }
 
-    .repo-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      align-items: center;
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .repo-meta .lang-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      display: inline-block;
-      margin-right: 3px;
-      background: var(--accent);
-    }
-
-    .repo-meta .stars::before { content: "⭐ "; }
-    .repo-meta .forks::before { content: "🍴 "; }
-
-    .tag {
-      background: var(--tag-bg);
-      color: var(--tag-text);
-      border-radius: 12px;
-      padding: 1px 8px;
-      font-size: 0.75rem;
-    }
-
-    /* ── Featured Repos ───────────────────────────────────── */
-    .featured-section {
-      margin-bottom: 2.5rem;
-    }
-
-    .featured-card {
+    /* ── Skeleton loader ──────────────────────────────────── */
+    .skeleton {
       background: var(--surface);
-      border: 1px solid var(--accent);
-      border-radius: 8px;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
       padding: 1.25rem;
       display: flex;
       flex-direction: column;
-      gap: 0.6rem;
-      transition: box-shadow 0.2s;
+      gap: 0.7rem;
     }
 
-    .featured-card:hover {
-      box-shadow: 0 0 0 2px var(--accent);
+    .skeleton-line {
+      height: 12px;
+      border-radius: 6px;
+      background: linear-gradient(90deg, var(--surface-2) 25%, var(--border) 50%, var(--surface-2) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.6s infinite;
     }
 
-    .featured-card a.repo-name {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      word-break: break-word;
+    @keyframes shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
     }
 
-    .featured-card a.repo-name:hover { text-decoration: underline; }
-
-    .featured-card .description {
-      color: var(--muted);
-      font-size: 0.875rem;
-      flex: 1;
+    /* ── Scroll-reveal ────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
-    .featured-badge {
-      display: inline-block;
-      background: var(--accent);
-      color: var(--bg);
-      font-size: 0.7rem;
-      font-weight: 700;
-      border-radius: 12px;
-      padding: 1px 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    /* ── Loading / Error ──────────────────────────────────── */
+    /* ── Status / Error ───────────────────────────────────── */
     #status {
+      display: none;
       text-align: center;
       color: var(--muted);
       padding: 3rem 0;
@@ -210,109 +427,133 @@
     /* ── Footer ───────────────────────────────────────────── */
     footer {
       text-align: center;
-      padding: 2rem;
+      padding: 2.5rem 1.5rem;
       color: var(--muted);
-      font-size: 0.8rem;
-      border-top: 1px solid var(--border);
-      margin-top: 3rem;
+      font-size: 0.82rem;
+      border-top: 1px solid var(--border-soft);
+      margin-top: 4rem;
+      background: var(--surface);
     }
 
+    footer p { margin-bottom: 0.4rem; }
     footer a { color: var(--accent); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
+
+    /* ── Responsive ───────────────────────────────────────── */
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.7rem; }
+      .stats { flex-direction: column; border-radius: var(--radius); }
+      .stats span { border-right: none; border-bottom: 1px solid var(--border); }
+      .stats span:last-child { border-bottom: none; }
+    }
   </style>
 </head>
 <body>
 
 <header>
-  <img id="avatar" src="" alt="Avatar" />
+  <div class="avatar-wrap">
+    <img id="avatar" src="" alt="Avatar" />
+  </div>
   <h1 id="display-name">Alpha48Alpha</h1>
   <p class="bio" id="bio">Loading profile…</p>
   <div class="stats">
-    <span><strong id="stat-repos">—</strong> repositories</span>
-    <span><strong id="stat-followers">—</strong> followers</span>
-    <span><strong id="stat-following">—</strong> following</span>
+    <span><strong id="stat-repos">—</strong>repositories</span>
+    <span><strong id="stat-followers">—</strong>followers</span>
+    <span><strong id="stat-following">—</strong>following</span>
   </div>
 </header>
 
 <main>
-  <section class="featured-section">
-    <h2 class="section-title">Alignment</h2>
-    <article class="featured-card" role="article">
-      <span class="featured-badge">Featured</span>
-      <a class="repo-name"
-         href="https://github.com/Alpha48Alpha/Alignment"
-         target="_blank" rel="noopener noreferrer">
-        Alignment
-      </a>
-      <p class="description">
-        A dedicated repository for LLM alignment research — safety evaluations,
-        robustness tests, and prompt engineering techniques to improve model
-        reliability and trustworthiness.
-      </p>
-      <div class="repo-meta">
-        <span><span class="lang-dot"></span>Markdown</span>
-        <span class="tag">alignment</span>
-        <span class="tag">llm-safety</span>
-        <span class="tag">prompt-engineering</span>
-      </div>
-    </article>
-  </section>
+  <h2 class="section-title"><span class="title-icon">✦</span> Featured Repositories</h2>
+  <div class="featured-sections-grid">
 
-  <section class="featured-section">
-    <h2 class="section-title">LLM-Safety</h2>
-    <article class="featured-card" role="article">
-      <span class="featured-badge">Featured</span>
-      <a class="repo-name"
-         href="https://github.com/Alpha48Alpha/LLM-Safety"
-         target="_blank" rel="noopener noreferrer">
-        LLM-Safety
-      </a>
-      <p class="description">
-        Research and resources focused on large language model safety — red-teaming
-        exercises, safety benchmarks, adversarial prompt analysis, and guardrail
-        strategies to mitigate harmful outputs.
-      </p>
-      <div class="repo-meta">
-        <span><span class="lang-dot"></span>Markdown</span>
-        <span class="tag">llm-safety</span>
-        <span class="tag">red-teaming</span>
-        <span class="tag">guardrails</span>
-      </div>
-    </article>
-  </section>
+    <div class="featured-card-wrap reveal">
+      <article class="featured-card" role="article">
+        <div class="featured-card-header">
+          <span class="featured-badge">Featured</span>
+        </div>
+        <a class="repo-name"
+           href="https://github.com/Alpha48Alpha/Alignment"
+           target="_blank" rel="noopener noreferrer">
+          Alignment
+        </a>
+        <p class="description">
+          A dedicated repository for LLM alignment research — safety evaluations,
+          robustness tests, and prompt engineering techniques to improve model
+          reliability and trustworthiness.
+        </p>
+        <div class="repo-meta">
+          <span><span class="lang-dot"></span>Markdown</span>
+          <span class="tag">alignment</span>
+          <span class="tag">llm-safety</span>
+          <span class="tag">prompt-engineering</span>
+        </div>
+        <a class="view-link" href="alignment/index.html">View details</a>
+      </article>
+    </div>
 
-  <section class="featured-section">
-    <h2 class="section-title">Prompt-Engineering</h2>
-    <article class="featured-card" role="article">
-      <span class="featured-badge">Featured</span>
-      <a class="repo-name"
-         href="https://github.com/Alpha48Alpha/Prompt-Engineering"
-         target="_blank" rel="noopener noreferrer">
-        Prompt-Engineering
-      </a>
-      <p class="description">
-        A curated collection of prompt engineering techniques — few-shot learning,
-        chain-of-thought prompting, instruction tuning patterns, and systematic
-        methods for optimizing model responses across diverse tasks.
-      </p>
-      <div class="repo-meta">
-        <span><span class="lang-dot"></span>Markdown</span>
-        <span class="tag">prompt-engineering</span>
-        <span class="tag">few-shot</span>
-        <span class="tag">chain-of-thought</span>
-      </div>
-    </article>
-  </section>
+    <div class="featured-card-wrap reveal">
+      <article class="featured-card" role="article">
+        <div class="featured-card-header">
+          <span class="featured-badge">Featured</span>
+        </div>
+        <a class="repo-name"
+           href="https://github.com/Alpha48Alpha/LLM-Safety"
+           target="_blank" rel="noopener noreferrer">
+          LLM-Safety
+        </a>
+        <p class="description">
+          Research and resources focused on large language model safety — red-teaming
+          exercises, safety benchmarks, adversarial prompt analysis, and guardrail
+          strategies to mitigate harmful outputs.
+        </p>
+        <div class="repo-meta">
+          <span><span class="lang-dot"></span>Markdown</span>
+          <span class="tag">llm-safety</span>
+          <span class="tag">red-teaming</span>
+          <span class="tag">guardrails</span>
+        </div>
+        <a class="view-link" href="llm-safety/index.html">View details</a>
+      </article>
+    </div>
 
-  <h2 class="section-title">Public Repositories</h2>
-  <div id="status">Loading repositories…</div>
+    <div class="featured-card-wrap reveal">
+      <article class="featured-card" role="article">
+        <div class="featured-card-header">
+          <span class="featured-badge">Featured</span>
+        </div>
+        <a class="repo-name"
+           href="https://github.com/Alpha48Alpha/Prompt-Engineering"
+           target="_blank" rel="noopener noreferrer">
+          Prompt-Engineering
+        </a>
+        <p class="description">
+          A curated collection of prompt engineering techniques — few-shot learning,
+          chain-of-thought prompting, instruction tuning patterns, and systematic
+          methods for optimizing model responses across diverse tasks.
+        </p>
+        <div class="repo-meta">
+          <span><span class="lang-dot"></span>Markdown</span>
+          <span class="tag">prompt-engineering</span>
+          <span class="tag">few-shot</span>
+          <span class="tag">chain-of-thought</span>
+        </div>
+        <a class="view-link" href="prompt-engineering/index.html">View details</a>
+      </article>
+    </div>
+
+  </div>
+
+  <h2 class="section-title"><span class="title-icon">⬡</span> Public Repositories</h2>
+  <div id="status">Failed to load repositories.</div>
   <div id="repo-grid" role="list" aria-label="Repositories"></div>
 </main>
 
 <footer>
-  Portfolio generated automatically from the
-  <a href="https://docs.github.com/en/rest" target="_blank" rel="noopener">GitHub REST API</a>.
-  View source on <a href="https://github.com/Alpha48Alpha/Alignment-Testing-" target="_blank" rel="noopener">GitHub</a>.
+  <p>Portfolio generated automatically via the
+    <a href="https://docs.github.com/en/rest" target="_blank" rel="noopener">GitHub REST API</a>.
+  </p>
+  <p>View source on <a href="https://github.com/Alpha48Alpha/Alignment-Testing-" target="_blank" rel="noopener">GitHub</a>.</p>
 </footer>
 
 <script>
@@ -328,6 +569,47 @@
     Ruby: '#701516', PHP: '#4F5D95', Swift: '#F05138',
   };
 
+  /* ── Scroll-reveal ──────────────────────────────────────── */
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  /* ── Animated stat counter ──────────────────────────────── */
+  function animateCount(el, target) {
+    const duration = 900;
+    const start    = performance.now();
+    const from     = 0;
+    (function tick(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - t, 3);
+      el.textContent = Math.round(from + (target - from) * ease);
+      if (t < 1) requestAnimationFrame(tick);
+    })(start);
+  }
+
+  /* ── Skeleton loaders ───────────────────────────────────── */
+  function showSkeletons(gridEl, count = 6) {
+    for (let i = 0; i < count; i++) {
+      const s = document.createElement('div');
+      s.className = 'skeleton';
+      s.innerHTML = `
+        <div class="skeleton-line" style="width:55%;height:14px"></div>
+        <div class="skeleton-line" style="width:90%"></div>
+        <div class="skeleton-line" style="width:75%"></div>
+        <div class="skeleton-line" style="width:40%;margin-top:4px"></div>
+      `;
+      gridEl.appendChild(s);
+    }
+  }
+
+  /* ── Data fetching ──────────────────────────────────────── */
   async function fetchJSON(url) {
     const res = await fetch(url, {
       headers: { Accept: 'application/vnd.github+json' },
@@ -339,12 +621,12 @@
   async function loadProfile() {
     try {
       const user = await fetchJSON(`${API_BASE}/users/${GITHUB_USER}`);
-      document.getElementById('avatar').src        = user.avatar_url;
+      document.getElementById('avatar').src = user.avatar_url;
       document.getElementById('display-name').textContent = user.name || user.login;
-      document.getElementById('bio').textContent   = user.bio || '';
-      document.getElementById('stat-repos').textContent      = user.public_repos;
-      document.getElementById('stat-followers').textContent  = user.followers;
-      document.getElementById('stat-following').textContent  = user.following;
+      document.getElementById('bio').textContent = user.bio || '';
+      animateCount(document.getElementById('stat-repos'),     user.public_repos);
+      animateCount(document.getElementById('stat-followers'), user.followers);
+      animateCount(document.getElementById('stat-following'), user.following);
     } catch (err) {
       console.warn('Could not load profile:', err.message);
     }
@@ -354,16 +636,18 @@
     const statusEl = document.getElementById('status');
     const gridEl   = document.getElementById('repo-grid');
 
+    showSkeletons(gridEl);
+
     try {
-      /* Fetch up to 100 repos sorted by most recently pushed */
       const repos = await fetchJSON(
         `${API_BASE}/users/${GITHUB_USER}/repos?sort=pushed&per_page=100`
       );
 
-      statusEl.style.display = 'none';
+      /* Remove skeletons */
+      gridEl.innerHTML = '';
 
       const sorted = repos
-        .filter(r => !r.fork)              /* hide forks — adjust as needed */
+        .filter(r => !r.fork)
         .sort((a, b) => b.stargazers_count - a.stargazers_count);
 
       if (sorted.length === 0) {
@@ -372,10 +656,11 @@
         return;
       }
 
-      sorted.forEach(repo => {
+      sorted.forEach((repo, i) => {
         const card = document.createElement('article');
-        card.className = 'repo-card';
+        card.className = 'repo-card reveal';
         card.setAttribute('role', 'listitem');
+        card.style.transitionDelay = `${Math.min(i * 40, 400)}ms`;
 
         const dotColor = LANG_COLORS[repo.language] || '#8b949e';
 
@@ -399,10 +684,14 @@
               : ''}
           </div>
         `;
+
         gridEl.appendChild(card);
+        revealObserver.observe(card);
       });
     } catch (err) {
+      gridEl.innerHTML = '';
       statusEl.textContent = `Failed to load repositories: ${err.message}`;
+      statusEl.style.display = 'block';
     }
   }
 
