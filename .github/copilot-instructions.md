@@ -56,3 +56,21 @@ See `evaluations/metrics.md` for per-metric scoring guidance and `evaluations/fr
 - Commit messages should be short and descriptive (imperative mood).
 - Do not introduce new dependencies or package managers.
 - Do not modify `.github/agents/` — those files are reserved for agent-specific configurations.
+
+### Bootstrap and Build
+There is **no build pipeline** for this repository. No compilation, bundling, or package installation is required.
+
+- For Markdown files: edits are immediately valid — no build step needed.
+- For `index.html`: preview by opening the file directly in a browser, or serve it locally:
+  ```bash
+  python3 -m http.server
+  # then open http://localhost:8000 in a browser
+  ```
+
+### Validating Changes
+Since there is no automated test suite, validate changes manually:
+
+- **Markdown files**: Check that headings, blockquotes, tables, and code fences render correctly (use a Markdown previewer or GitHub's preview tab).
+- **Prompt files**: Confirm new prompt sets follow the format (variants as blockquotes `>`, expected answer, evaluation criteria).
+- **`index.html`**: Open in a browser to verify the portfolio renders without console errors; ensure the GitHub API fetch displays repository cards correctly.
+- **Links**: Verify any cross-references between files (e.g., links from `README.md` to `evaluations/metrics.md`) resolve to existing paths.
