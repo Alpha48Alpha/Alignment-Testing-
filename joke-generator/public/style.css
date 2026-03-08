@@ -1,0 +1,149 @@
+/* ── Reset & base ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: #0d1117;
+  color: #c9d1d9;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+/* ── Header ────────────────────────────────────────────────── */
+header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+header h1 {
+  font-size: 2.4rem;
+  color: #58a6ff;
+  letter-spacing: 0.02em;
+}
+
+header p {
+  margin-top: 0.4rem;
+  color: #8b949e;
+  font-size: 1rem;
+}
+
+/* ── Card ──────────────────────────────────────────────────── */
+.card {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 12px;
+  padding: 2rem 2.5rem;
+  width: 100%;
+  max-width: 640px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+
+/* ── Filter row ────────────────────────────────────────────── */
+.filter-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.filter-row label {
+  font-size: 0.9rem;
+  color: #8b949e;
+  white-space: nowrap;
+}
+
+.filter-row select {
+  flex: 1;
+  min-width: 160px;
+  background: #0d1117;
+  color: #c9d1d9;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.filter-row select:focus {
+  border-color: #58a6ff;
+}
+
+/* ── Joke display ──────────────────────────────────────────── */
+.joke-box {
+  min-height: 96px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.joke-text {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: #e6edf3;
+}
+
+.joke-setup {
+  font-size: 1.1rem;
+  color: #e6edf3;
+  font-weight: 500;
+}
+
+.joke-delivery {
+  font-size: 1.1rem;
+  color: #58a6ff;
+  font-style: italic;
+}
+
+/* ── Loading / error states ────────────────────────────────── */
+.state-loading {
+  color: #8b949e;
+  font-style: italic;
+}
+
+.state-error {
+  color: #f85149;
+}
+
+/* ── Button ────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #238636;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 1.4rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  user-select: none;
+}
+
+.btn:hover { background: #2ea043; }
+.btn:active { transform: scale(0.97); }
+.btn:disabled { background: #21262d; color: #484f58; cursor: not-allowed; }
+
+/* ── Footer ────────────────────────────────────────────────── */
+footer {
+  margin-top: 2.5rem;
+  font-size: 0.8rem;
+  color: #484f58;
+  text-align: center;
+}
+
+footer a {
+  color: #58a6ff;
+  text-decoration: none;
+}
+
+footer a:hover { text-decoration: underline; }
