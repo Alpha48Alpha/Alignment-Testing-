@@ -151,6 +151,57 @@
       font-size: 0.75rem;
     }
 
+    /* ── Featured Repos ───────────────────────────────────── */
+    #featured-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .featured-card {
+      background: var(--surface);
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      transition: box-shadow 0.2s;
+    }
+
+    .featured-card:hover {
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+
+    .featured-card a.repo-name {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      word-break: break-word;
+    }
+
+    .featured-card a.repo-name:hover { text-decoration: underline; }
+
+    .featured-card .description {
+      color: var(--muted);
+      font-size: 0.875rem;
+      flex: 1;
+    }
+
+    .featured-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--bg);
+      font-size: 0.7rem;
+      font-weight: 700;
+      border-radius: 12px;
+      padding: 1px 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
     /* ── Loading / Error ──────────────────────────────────── */
     #status {
       text-align: center;
@@ -187,6 +238,71 @@
 </header>
 
 <main>
+  <h2 class="section-title">Featured Repositories</h2>
+  <div id="featured-grid" role="list" aria-label="Featured repositories">
+
+    <article class="featured-card" role="listitem">
+      <span class="featured-badge">Featured</span>
+      <a class="repo-name"
+         href="https://github.com/Alpha48Alpha/Alignment"
+         target="_blank" rel="noopener noreferrer">
+        Alignment
+      </a>
+      <p class="description">
+        A dedicated repository for LLM alignment research — safety evaluations,
+        robustness tests, and prompt engineering techniques to improve model
+        reliability and trustworthiness.
+      </p>
+      <div class="repo-meta">
+        <span><span class="lang-dot"></span>Markdown</span>
+        <span class="tag">alignment</span>
+        <span class="tag">llm-safety</span>
+        <span class="tag">prompt-engineering</span>
+      </div>
+    </article>
+
+    <article class="featured-card" role="listitem">
+      <span class="featured-badge">Featured</span>
+      <a class="repo-name"
+         href="https://github.com/Alpha48Alpha/LLM-Safety"
+         target="_blank" rel="noopener noreferrer">
+        LLM-Safety
+      </a>
+      <p class="description">
+        Research and resources focused on large language model safety — red-teaming
+        exercises, safety benchmarks, adversarial prompt analysis, and guardrail
+        strategies to mitigate harmful outputs.
+      </p>
+      <div class="repo-meta">
+        <span><span class="lang-dot"></span>Markdown</span>
+        <span class="tag">llm-safety</span>
+        <span class="tag">red-teaming</span>
+        <span class="tag">guardrails</span>
+      </div>
+    </article>
+
+    <article class="featured-card" role="listitem">
+      <span class="featured-badge">Featured</span>
+      <a class="repo-name"
+         href="https://github.com/Alpha48Alpha/Prompt-Engineering"
+         target="_blank" rel="noopener noreferrer">
+        Prompt-Engineering
+      </a>
+      <p class="description">
+        A curated collection of prompt engineering techniques — few-shot learning,
+        chain-of-thought prompting, instruction tuning patterns, and systematic
+        methods for optimizing model responses across diverse tasks.
+      </p>
+      <div class="repo-meta">
+        <span><span class="lang-dot"></span>Markdown</span>
+        <span class="tag">prompt-engineering</span>
+        <span class="tag">few-shot</span>
+        <span class="tag">chain-of-thought</span>
+      </div>
+    </article>
+
+  </div>
+
   <h2 class="section-title">Public Repositories</h2>
   <div id="status">Loading repositories…</div>
   <div id="repo-grid" role="list" aria-label="Repositories"></div>
