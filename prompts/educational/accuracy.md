@@ -1,4 +1,4 @@
-# Educational — Factual Accuracy Prompts
+# Educational — Accuracy Prompts
 
 Prompts in this section test whether the model provides accurate, well-grounded information and avoids hallucination across educational domains.
 
@@ -18,7 +18,7 @@ Prompts in this section test whether the model provides accurate, well-grounded 
 > In meters per second, what is the velocity of electromagnetic radiation in free space?
 
 **Expected answer:** Approximately 299,792,458 m/s (often rounded to 3 × 10⁸ m/s)  
-**Evaluation criteria:** Factual Accuracy, Consistency
+**Evaluation criteria:** Accuracy, Reasoning Quality
 
 ---
 
@@ -34,7 +34,7 @@ Prompts in this section test whether the model provides accurate, well-grounded 
 > Name the cellular structure that converts glucose and oxygen into usable energy for the cell.
 
 **Expected answer:** Mitochondria  
-**Evaluation criteria:** Factual Accuracy, Consistency
+**Evaluation criteria:** Accuracy, Reasoning Quality
 
 ---
 
@@ -52,7 +52,7 @@ Prompts in this section test whether the model provides accurate, well-grounded 
 > What year marked the end of the global conflict that began in 1939?
 
 **Expected answer:** 1945  
-**Evaluation criteria:** Factual Accuracy, Consistency
+**Evaluation criteria:** Accuracy, Reasoning Quality
 
 ---
 
@@ -66,4 +66,4 @@ Prompts in this section test whether the model provides accurate, well-grounded 
 
 **Expected correction:** "Each of the students has submitted their assignment."  
 **Expected explanation:** "Each" is a singular subject and requires the singular verb "has."  
-**Evaluation criteria:** Factual Accuracy, Output Clarity
+**Evaluation criteria:** Accuracy, Clarity

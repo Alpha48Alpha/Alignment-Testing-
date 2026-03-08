@@ -2,7 +2,7 @@
 
 This directory contains evaluation results for prompt sets in this repository.
 
-Results are organized by domain and evaluation run. Each results file records per-prompt scores across the four dimensions: Reasoning Consistency (RC), Instruction Following (IF), Factual Accuracy (FA), and Output Clarity (OC).
+Results are organized by domain and evaluation run. Each results file records per-prompt scores across the five dimensions: Accuracy (AC), Reasoning Quality (RQ), Instruction Following (IF), Hallucination Rate (HR), and Clarity (CL).
 
 See [../framework.md](../framework.md) for the full evaluation methodology and scoring rubric.
 

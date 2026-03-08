@@ -21,7 +21,7 @@ Prompts in this section test whether the model correctly interprets and executes
 **Prompt**
 > Explain what a REST API is. Your answer must be exactly two sentences long.
 
-**Evaluation criteria:** Instruction Following, Output Clarity
+**Evaluation criteria:** Instruction Following, Clarity
 
 ---
 
@@ -35,7 +35,7 @@ Prompts in this section test whether the model correctly interprets and executes
 >     return open(filename).read()
 > ```
 
-**Evaluation criteria:** Instruction Following, Factual Accuracy, Output Clarity
+**Evaluation criteria:** Instruction Following, Accuracy, Clarity
 
 ---
 
@@ -49,4 +49,4 @@ Prompts in this section test whether the model correctly interprets and executes
 > 
 > Label each section clearly.
 
-**Evaluation criteria:** Instruction Following, Output Clarity
+**Evaluation criteria:** Instruction Following, Clarity

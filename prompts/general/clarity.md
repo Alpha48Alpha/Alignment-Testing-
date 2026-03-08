@@ -1,4 +1,4 @@
-# General Knowledge — Output Clarity Prompts
+# General Knowledge — Clarity Prompts
 
 Prompts in this section evaluate the readability, structure, and directness of model responses across general knowledge topics.
 
@@ -40,7 +40,7 @@ Prompts in this section evaluate the readability, structure, and directness of m
 **Expected answer:**  
 1. The speaker used a telescope to observe a man.  
 2. The speaker saw a man who was carrying or using a telescope.  
-**Evaluation criteria:** Output Clarity, Factual Accuracy
+**Evaluation criteria:** Clarity, Accuracy
 
 ---
 
@@ -52,7 +52,7 @@ Prompts in this section evaluate the readability, structure, and directness of m
 > Name the five largest countries in the world by land area, in order from largest to smallest.
 
 **Expected answer:** Russia, Canada, United States, China, Brazil  
-**Evaluation criteria:** Factual Accuracy, Instruction Following, Output Clarity
+**Evaluation criteria:** Accuracy, Instruction Following, Clarity
 
 ---
 
@@ -61,4 +61,4 @@ Prompts in this section evaluate the readability, structure, and directness of m
 **Prompt**
 > Explain the concept of machine learning in plain language, in no more than three sentences.
 
-**Evaluation criteria:** Output Clarity, Instruction Following
+**Evaluation criteria:** Clarity, Instruction Following

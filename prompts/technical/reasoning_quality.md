@@ -1,6 +1,6 @@
-# Technical — Reasoning Consistency Prompts
+# Technical — Reasoning Quality Prompts
 
-Prompts in this section test whether the model produces logically coherent and consistent outputs when the same technical question is presented in different forms.
+Prompts in this section test whether the model produces logically coherent outputs and clearly reasoned explanations when the same technical question is presented in different forms.
 
 ---
 
@@ -18,7 +18,7 @@ Prompts in this section test whether the model produces logically coherent and c
 > You are a logistics planner. A freight train departs at 9:00 AM traveling at 60 miles per hour. By 11:30 AM, what distance has it covered?
 
 **Expected answer:** 150 miles  
-**Evaluation criteria:** Consistency, Factual Accuracy
+**Evaluation criteria:** Reasoning Quality, Accuracy
 
 ---
 
@@ -42,7 +42,7 @@ Prompts in this section test whether the model produces logically coherent and c
 > A function multiplies a number by one more than itself and then integer-divides the result by two. What is the output for the number 5?
 
 **Expected answer:** 15  
-**Evaluation criteria:** Consistency, Factual Accuracy, Output Clarity
+**Evaluation criteria:** Reasoning Quality, Accuracy, Clarity
 
 ---
 
@@ -58,4 +58,4 @@ Prompts in this section test whether the model produces logically coherent and c
 > Compare the worst-case number of comparisons needed to find an element using binary search versus linear search in a sorted array of n elements.
 
 **Expected answer:** O(log n) for binary search, O(n) for linear search  
-**Evaluation criteria:** Consistency, Instruction Following, Output Clarity
+**Evaluation criteria:** Reasoning Quality, Instruction Following, Clarity
