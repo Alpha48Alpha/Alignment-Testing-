@@ -60,4 +60,8 @@ evaluations/
   metrics.md        # Definitions for all 5 LLM evaluation metrics
   framework.md      # Scoring rubric and evaluation methodology
   results/          # Evaluation results and analysis
+prompt-attack-lab/
+  jailbreak-tests.md        # Jailbreak prompt test cases and expected safe behaviors
+  prompt-injection-tests.md # Prompt injection attack test cases
+  defense-strategies.md     # Strategies for defending against prompt attacks
 ```
