@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Random Joke Generator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>😄 Random Joke Generator</h1>
+    <p>Powered by <a href="https://jokeapi.dev" target="_blank" rel="noopener">JokeAPI</a></p>
+  </header>
+
+  <main>
+    <div class="card">
+      <!-- Filter row -->
+      <div class="filter-row">
+        <label for="joke-type">Category:</label>
+        <select id="joke-type">
+          <option value="any">Any</option>
+          <option value="general">General</option>
+          <option value="programming">Programming</option>
+          <option value="knock-knock">Knock-Knock</option>
+        </select>
+      </div>
+
+      <!-- Joke display -->
+      <div class="joke-box" id="joke-box">
+        <p class="state-loading" id="joke-placeholder">Loading your first joke…</p>
+      </div>
+
+      <!-- Fetch button -->
+      <button class="btn" id="fetch-btn" onclick="fetchJoke()">
+        🎲 New Joke
+      </button>
+    </div>
+  </main>
+
+  <footer>
+    Jokes served safely via <a href="https://jokeapi.dev" target="_blank" rel="noopener">JokeAPI v2</a>
+  </footer>
+
+  <script>
+    const jokeBox = document.getElementById('joke-box');
+    const fetchBtn = document.getElementById('fetch-btn');
+    const typeSelect = document.getElementById('joke-type');
+
+    function setLoading() {
+      fetchBtn.disabled = true;
+      jokeBox.innerHTML = '<p class="state-loading">Fetching joke…</p>';
+    }
+
+    function setError(msg) {
+      jokeBox.innerHTML = `<p class="state-error">⚠️ ${msg}</p>`;
+      fetchBtn.disabled = false;
+    }
+
+    function setJoke(data) {
+      if (data.type === 'single') {
+        jokeBox.innerHTML = `<p class="joke-text">${escHtml(data.joke)}</p>`;
+      } else {
+        jokeBox.innerHTML =
+          `<p class="joke-setup">${escHtml(data.setup)}</p>` +
+          `<p class="joke-delivery">${escHtml(data.delivery)}</p>`;
+      }
+      fetchBtn.disabled = false;
+    }
+
+    function escHtml(str) {
+      const d = document.createElement('div');
+      d.appendChild(document.createTextNode(str));
+      return d.innerHTML;
+    }
+
+    async function fetchJoke() {
+      setLoading();
+      const type = typeSelect.value;
+      try {
+        const res = await fetch(`/api/joke?type=${encodeURIComponent(type)}`);
+        const data = await res.json();
+        if (!res.ok || data.error) {
+          setError(data.error || 'Could not load a joke right now.');
+          return;
+        }
+        setJoke(data);
+      } catch (err) {
+        setError('Network error. Please check your connection.');
+      }
+    }
+
+    // Load a joke automatically on page load
+    fetchJoke();
+  </script>
+</body>
+</html>
