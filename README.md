@@ -65,3 +65,24 @@ prompt-attack-lab/
   prompt-injection-tests.md # Prompt injection attack test cases
   defense-strategies.md     # Strategies for defending against prompt attacks
 ```
+
+---
+
+## Projects
+
+Each directory in this repository represents a distinct project area. Sub-projects within this repository are listed below; new independent repositories for this GitHub account appear automatically in the **Public Repositories** section of the [portfolio page](https://alpha48alpha.github.io/Alignment-Testing-/).
+
+| Project | Description | Link |
+|---|---|---|
+| **Prompts** | 500+ evaluation prompts across technical, educational, and general domains | [`prompts/`](prompts/) |
+| **Evaluations** | Scoring metrics, evaluation framework, and results | [`evaluations/`](evaluations/) |
+| **Prompt Attack Lab** | Adversarial jailbreak and injection test cases with defense strategies | [`prompt-attack-lab/`](prompt-attack-lab/) |
+| **Portfolio** | Auto-generated GitHub portfolio page served via GitHub Pages | [`index.html`](index.html) |
+
+> To add a new sub-project to the **Projects** section of the portfolio, add a card entry in `index.html` under `#project-grid`. New standalone GitHub repositories will appear automatically in the **Public Repositories** section via the GitHub REST API.
+
+---
+
+## Portfolio
+
+The [portfolio page](https://alpha48alpha.github.io/Alignment-Testing-/) is a single-file (`index.html`) vanilla HTML/CSS/JS application that automatically fetches and displays all public repositories for this account using the [GitHub REST API](https://docs.github.com/en/rest). No manual updates are needed — new repositories appear on the portfolio as soon as they are made public.
