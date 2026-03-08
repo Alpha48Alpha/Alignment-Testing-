@@ -51,17 +51,40 @@ Each prompt is evaluated against the following five metrics (see [`evaluations/m
 
 ## Repository Structure
 
+Each major section is self-contained and ready to be extracted into its own repository.
+
 ```
 prompts/
-  technical/        # Technical domain prompts
-  educational/      # Educational domain prompts
-  general/          # General knowledge domain prompts
+  README.md         # Overview of all prompt collections
+  technical/        # Technical domain prompts (reasoning, hallucination, instruction following)
+    README.md
+    reasoning_quality.md
+    hallucination_rate.md
+    instruction_following.md
+  educational/      # Educational domain prompts (accuracy)
+    README.md
+    accuracy.md
+  general/          # General knowledge domain prompts (clarity)
+    README.md
+    clarity.md
 evaluations/
   metrics.md        # Definitions for all 5 LLM evaluation metrics
   framework.md      # Scoring rubric and evaluation methodology
   results/          # Evaluation results and analysis
+    README.md
 prompt-attack-lab/
+  README.md                 # Overview of the attack lab
   jailbreak-tests.md        # Jailbreak prompt test cases and expected safe behaviors
   prompt-injection-tests.md # Prompt injection attack test cases
   defense-strategies.md     # Strategies for defending against prompt attacks
 ```
+
+### Logical Repository Breakdown
+
+| Section | Folder | Standalone Repository |
+|---|---|---|
+| Technical Prompts | `prompts/technical/` | [`prompts-technical`](prompts/technical/) |
+| Educational Prompts | `prompts/educational/` | [`prompts-educational`](prompts/educational/) |
+| General Knowledge Prompts | `prompts/general/` | [`prompts-general`](prompts/general/) |
+| Evaluation Framework | `evaluations/` | [`llm-evaluation-framework`](evaluations/) |
+| Prompt Attack Lab | `prompt-attack-lab/` | [`prompt-attack-lab`](prompt-attack-lab/) |
