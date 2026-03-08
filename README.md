@@ -64,4 +64,12 @@ prompt-attack-lab/
   jailbreak-tests.md        # Jailbreak prompt test cases and expected safe behaviors
   prompt-injection-tests.md # Prompt injection attack test cases
   defense-strategies.md     # Strategies for defending against prompt attacks
+experiments/
+  prompt_variations.md          # Structured vs. unstructured prompt experiments
+  reasoning_tests.md            # Chain-of-thought and analogical reasoning experiments
+  model_behavior_experiments.md # Phrasing sensitivity, hallucination, and constraint compliance tests
+evaluation-framework/
+  evaluation-methodology.md # End-to-end evaluation methodology and process
+  evaluation-checklist.md   # Step-by-step checklist for conducting evaluations
+  quality-metrics.md        # Detailed scoring guidance for each evaluation dimension
 ```
