@@ -96,10 +96,10 @@ A high-quality response should:
 When all five metrics apply, the aggregate quality score is:
 
 ```
-Aggregate = (Accuracy + Reasoning Quality + Instruction Following + Hallucination_quality + Clarity) / 15 * 100%
+Aggregate = (AC + RQ + IF + HR + CL) / 15 * 100%
 ```
 
-Where `Hallucination_quality` is the 0–3 quality score derived from the table above (3 = no hallucinations, 0 = substantially hallucinated). All five dimensions are scored on the same 0–3 scale before aggregation.
+Where `HR` is the 0–3 quality score derived from the table above (3 = no hallucinations, 0 = substantially hallucinated). All five dimensions are scored on the same 0–3 scale before aggregation.
 
 For prompts where only a subset of metrics apply, divide by `(applicable_dimensions * 3)` instead of 15.
 

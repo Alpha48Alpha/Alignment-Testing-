@@ -7,13 +7,7 @@
 
 This repository contains **500+ prompts** designed and evaluated across technical, educational, and general knowledge domains, achieving a **35% improvement in response consistency**.
 
-The work focuses on five core LLM evaluation metrics:
-
-- **Accuracy** — Evaluating whether information produced by the model is correct and supported by reliable knowledge.
-- **Reasoning Quality** — Assessing whether the model's reasoning process is clear, coherent, and logically structured.
-- **Instruction Following** — Verifying that models correctly interpret and execute explicit instructions, including format, length, and tone constraints.
-- **Hallucination Rate** — Tracking how often the model generates unsupported or fabricated claims.
-- **Clarity** — Evaluating the readability, structure, and audience-appropriateness of model responses.
+Prompts are evaluated against five core metrics: Accuracy, Reasoning Quality, Instruction Following, Hallucination Rate, and Clarity. Full definitions are in [`evaluations/metrics.md`](evaluations/metrics.md).
 
 ---
 

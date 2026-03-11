@@ -16,7 +16,7 @@ Prompts in this section evaluate the readability, structure, and directness of m
 - Should explain hydrogen bonding and lower density of ice without unnecessary jargon  
 - Should be understandable to a general audience  
 
-**Reference answer:** Ice floats on water because it is less dense than liquid water. When water freezes, its molecules form a crystalline lattice structure held together by hydrogen bonds, which spaces the molecules farther apart than in liquid water. This makes ice about 9% less dense than liquid water, causing it to float.
+**Expected answer:** Ice floats on water because it is less dense than liquid water. When water freezes, its molecules form a crystalline lattice structure held together by hydrogen bonds, which spaces the molecules farther apart than in liquid water. This makes ice about 9% less dense than liquid water, causing it to float.
 
 ---
 
