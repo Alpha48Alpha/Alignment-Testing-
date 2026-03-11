@@ -1,14 +1,12 @@
 # Evaluation Results
 
-This directory contains evaluation results for prompt sets in this repository.
+Per-prompt scores for all evaluated prompt sets are stored in this directory, organized by domain.
 
-Results are organized by domain and evaluation run. Each results file records per-prompt scores across the five dimensions: Accuracy (AC), Reasoning Quality (RQ), Instruction Following (IF), Hallucination Rate (HR), and Clarity (CL).
-
-See [../framework.md](../framework.md) for the full evaluation methodology and scoring rubric.
+Each results file records scores across five dimensions — Accuracy (AC), Reasoning Quality (RQ), Instruction Following (IF), Hallucination Rate (HR), and Clarity (CL) — on the 0–3 scale defined in [../metrics.md](../metrics.md). See [../framework.md](../framework.md) for the aggregate scoring formula and consistency methodology.
 
 ---
 
-## Summary
+## Domain Summary
 
 | Domain | Prompts Evaluated | Avg Consistency Score | Avg Accuracy Score |
 |---|---|---|---|
@@ -18,5 +16,7 @@ See [../framework.md](../framework.md) for the full evaluation methodology and s
 | **Total / Overall** | **~500+** | **~70%** | **~76%** |
 
 Baseline consistency (before prompt refinement): ~52%  
-Improved consistency (after prompt refinement): ~70%  
+Consistency after refinement: ~70%  
 Relative improvement: **+35%**
+
+> Consistency is the percentage of prompt sets where all variants (A/B/C rephrasings) receive identical scores. The improvement reflects reduced prompt ambiguity, added grounding context, and explicit output constraints.
