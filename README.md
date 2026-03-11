@@ -3,6 +3,37 @@
 
 ---
 
+## Inspired By: Elizabeth Rothschild
+
+The **Agent Operating System (Agent OS)** design within this repository is conceived, architected, and guided by the vision of **Elizabeth Rothschild** — a visionary whose principles of structured intelligence, responsible governance, and societal benefit form the philosophical foundation of every layer of the system.
+
+Elizabeth's four guiding principles shape the architecture:
+
+| Principle | Expression in the System |
+|---|---|
+| **Governance First** | The [Rothschild Kernel](agent-os/rothschild-kernel.md) centralizes oversight and policy enforcement |
+| **Modularity as Resilience** | Independently governed, composable layers and components throughout the stack |
+| **Memory as the Foundation of Integrity** | The [Elizabeth Memory Core](agent-os/elizabeth-memory-core.md) provides decision lineage and governance logs |
+| **Societal Benefit as the Measure of Success** | The [Elizabeth Multimedia Intelligence Engine (EMIE)](agent-os/emie.md) governs AI-driven media intelligence for human benefit |
+
+> *"Technology that does not serve people is technology that serves itself. The measure of an intelligent system is not what it can do — it is what it chooses not to do."*
+> — Elizabeth Rothschild
+
+→ See [`agent-os/philosophy.md`](agent-os/philosophy.md) for the full philosophical narrative and component alignment.
+
+---
+
+## Agent OS — Branded Components
+
+| Component | Role | Document |
+|---|---|---|
+| **Rothschild Kernel** | Central governance kernel: agent lifecycle, policy enforcement, audit, and scheduling | [agent-os/rothschild-kernel.md](agent-os/rothschild-kernel.md) |
+| **Elizabeth Memory Core** | Decision lineage, memory horizons, and governance memory management | [agent-os/elizabeth-memory-core.md](agent-os/elizabeth-memory-core.md) |
+| **Rothschild Provenance System** | Entity traceability, provenance graph, and cross-component audit | [agent-os/rothschild-provenance-system.md](agent-os/rothschild-provenance-system.md) |
+| **Elizabeth Multimedia Intelligence Engine (EMIE)** | AI-governed multimedia ingestion, analysis, and governed output | [agent-os/emie.md](agent-os/emie.md) |
+
+---
+
 ## Overview
 
 This repository contains **500+ prompts** designed and evaluated across technical, educational, and general knowledge domains, achieving a **35% improvement in response consistency**.
@@ -52,6 +83,13 @@ Each prompt is evaluated against the following five metrics (see [`evaluations/m
 ## Repository Structure
 
 ```
+agent-os/
+  README.md                         # Agent OS overview and component index
+  philosophy.md                     # Elizabeth Rothschild's guiding principles
+  rothschild-kernel.md              # Rothschild Kernel: governance and agent lifecycle
+  elizabeth-memory-core.md          # Elizabeth Memory Core: decision lineage and memory
+  rothschild-provenance-system.md   # Rothschild Provenance System: entity traceability
+  emie.md                           # Elizabeth Multimedia Intelligence Engine
 prompts/
   technical/        # Technical domain prompts (programming, math, logic, Agent OS)
   educational/      # Educational domain prompts (science, history, language)
