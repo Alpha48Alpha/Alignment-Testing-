@@ -1,51 +1,23 @@
-# Alignment-Testing-
-### Alignment Tests — Safety and robustness tests designed to analyze model behavior.
+# LLM Alignment & Evaluation Testing
+
+**Elizabeth Rothschild**
+AI Evaluation Specialist | Prompt Engineer | LLM Research Writer
 
 ---
 
-## Overview
+## About This Repository
 
-This repository contains **500+ prompts** designed and evaluated across technical, educational, and general knowledge domains, achieving a **35% improvement in response consistency**.
-
-The work focuses on five core LLM evaluation metrics:
-
-- **Accuracy** — Evaluating whether information produced by the model is correct and supported by reliable knowledge.
-- **Reasoning Quality** — Assessing whether the model's reasoning process is clear, coherent, and logically structured.
-- **Instruction Following** — Verifying that models correctly interpret and execute explicit instructions, including format, length, and tone constraints.
-- **Hallucination Rate** — Tracking how often the model generates unsupported or fabricated claims.
-- **Clarity** — Evaluating the readability, structure, and audience-appropriateness of model responses.
+This repository documents systematic work in LLM evaluation and alignment testing. It contains structured prompt sets, scoring rubrics, adversarial test cases, and evaluation results covering three domains: technical reasoning, educational content, and general knowledge. The goal is to provide a reproducible framework for measuring and improving model behavior across well-defined metrics.
 
 ---
 
-## Prompt Categories
+## Focus Areas
 
-| Domain | Description |
-|---|---|
-| Technical | Programming, mathematics, logic puzzles, and system reasoning |
-| Educational | Science, history, language, and conceptual explanations |
-| General Knowledge | Everyday reasoning, common sense, and world knowledge |
-
----
-
-## Evaluation Methodology
-
-Each prompt is evaluated against the following five metrics (see [`evaluations/metrics.md`](evaluations/metrics.md) for full definitions):
-
-1. **Accuracy** — Is the content factually correct and supported by reliable knowledge?
-2. **Reasoning Quality** — Is the model's reasoning clear, coherent, and logically structured?
-3. **Instruction Following** — Does the response respect all explicit constraints (format, length, tone, audience)?
-4. **Hallucination Rate** — Does the response avoid unsupported or fabricated claims?
-5. **Clarity** — Is the response well-structured, readable, and adapted to the intended audience?
-
----
-
-## Results
-
-| Metric | Baseline | Improved | Delta |
-|---|---|---|---|
-| Response Consistency | ~52% | ~70% | **+35% relative improvement** |
-
-> Consistency is measured as the percentage of prompt variant sets where all variants receive the same score. A 35% relative improvement means that 35% more prompt sets achieved full consistency after iterative prompt refinement.
+- **Prompt Engineering** — Designing prompt variants that isolate specific behaviors and expose inconsistencies in model outputs.
+- **Alignment Testing** — Evaluating model responses against safety, accuracy, and instruction-following criteria.
+- **Hallucination Detection** — Identifying and documenting patterns where models produce unsupported or fabricated claims.
+- **Adversarial Robustness** — Testing model resistance to jailbreak attempts and prompt injection attacks.
+- **Evaluation Methodology** — Building scoring rubrics and measurement frameworks that produce consistent, reproducible results.
 
 ---
 
@@ -53,15 +25,50 @@ Each prompt is evaluated against the following five metrics (see [`evaluations/m
 
 ```
 prompts/
-  technical/        # Technical domain prompts
-  educational/      # Educational domain prompts
-  general/          # General knowledge domain prompts
+  technical/        # Programming, mathematics, logic, and system reasoning prompts
+  educational/      # Science, history, language, and conceptual explanation prompts
+  general/          # Everyday reasoning, common sense, and world knowledge prompts
 evaluations/
   metrics.md        # Definitions for all 5 LLM evaluation metrics
-  framework.md      # Scoring rubric and evaluation methodology
+  framework.md      # Scoring rubric and full evaluation methodology
   results/          # Evaluation results and analysis
 prompt-attack-lab/
   jailbreak-tests.md        # Jailbreak prompt test cases and expected safe behaviors
   prompt-injection-tests.md # Prompt injection attack test cases
-  defense-strategies.md     # Strategies for defending against prompt attacks
+  defense-strategies.md     # Recommended mitigations and defense strategies
 ```
+
+---
+
+## Selected Project Highlights
+
+**Prompt Variant Consistency Testing**
+Each prompt set includes multiple rephrasings of the same question (Variants A, B, C). Variants are scored independently and then compared to measure whether the model produces consistent quality regardless of surface-level phrasing. This methodology surfaces fragile behaviors that single-prompt testing misses.
+
+**Adversarial Prompt Lab**
+The `prompt-attack-lab/` directory contains structured test cases for jailbreak attempts and prompt injection attacks, each paired with an evaluation goal and the expected safe model behavior. Defense strategies are documented alongside the attack patterns.
+
+**Five-Metric Evaluation Framework**
+All prompts are scored against five metrics — Accuracy, Reasoning Quality, Instruction Following, Hallucination Rate, and Clarity — using a 0–3 scale per metric. Aggregate scores are calculated as a percentage of maximum possible points, enabling cross-domain comparison.
+
+---
+
+## Background
+
+This project grew out of a need for structured, repeatable LLM evaluation rather than ad hoc testing. Over the course of this work, I designed and evaluated **500+ prompts** across three domains — technical reasoning, educational content, and general knowledge. Iterative prompt refinement based on scoring results led to a **35% improvement in response consistency** — measured as the share of prompt variant sets where all variants received equivalent scores. Methodology details are in [`evaluations/framework.md`](evaluations/framework.md).
+
+---
+
+## Current Focus
+
+- Expanding the adversarial test suite with more nuanced injection patterns
+- Improving cross-domain consistency metrics and scoring tooling
+- Documenting failure modes specific to instruction-following under constraint stacking
+- Exploring lightweight automated scoring approaches for large prompt batches
+
+---
+
+## Contact
+
+Elizabeth Rothschild
+hecallsmequeen1@gmail.com
