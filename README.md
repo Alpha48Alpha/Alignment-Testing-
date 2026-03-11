@@ -21,7 +21,7 @@ The work focuses on five core LLM evaluation metrics:
 
 | Domain | Description |
 |---|---|
-| Technical | Programming, mathematics, logic puzzles, system reasoning, and Agent OS architecture |
+| Technical | Programming, mathematics, logic puzzles, system reasoning, Agent OS architecture, and Media Engine design |
 | Educational | Science, history, language, and conceptual explanations |
 | General Knowledge | Everyday reasoning, common sense, and world knowledge |
 
@@ -53,13 +53,19 @@ Each prompt is evaluated against the following five metrics (see [`evaluations/m
 
 ```
 prompts/
-  technical/        # Technical domain prompts (programming, math, logic, Agent OS)
+  technical/        # Technical domain prompts (programming, math, logic, Agent OS, Media Engine)
   educational/      # Educational domain prompts (science, history, language)
   general/          # General knowledge domain prompts
 evaluations/
   metrics.md        # Definitions for all 5 LLM evaluation metrics
   framework.md      # Scoring rubric and evaluation methodology
   results/          # Per-domain evaluation results and analysis
+media_engine/
+  ingestion/        # Multi-format media ingestion adapters (MediaIngestionAdapter, MediaObject)
+  processing/       # Transcoding, resizing, and compression pipeline (MediaProcessingPipeline)
+  ai_tagger/        # AI-driven analysis: object detection, speech-to-text, sentiment (MediaAnalyzer)
+  api_endpoints/    # Monetizable REST API with API key auth and usage tracking (create_app)
+  README.md         # Full Media Engine documentation and API reference
 prompt-attack-lab/
   jailbreak-tests.md        # Jailbreak prompt test cases and expected safe behaviors
   prompt-injection-tests.md # Prompt injection attack test cases
