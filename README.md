@@ -22,6 +22,7 @@ The work focuses on five core LLM evaluation metrics:
 | Domain | Description |
 |---|---|
 | Technical | Programming, mathematics, logic puzzles, system reasoning, and Agent OS architecture |
+| Technical — Agent Dispatch | Agent OS action deployment and multi-agent coordination for real-world media-building workflows |
 | Educational | Science, history, language, and conceptual explanations |
 | General Knowledge | Everyday reasoning, common sense, and world knowledge |
 
@@ -54,12 +55,15 @@ Each prompt is evaluated against the following five metrics (see [`evaluations/m
 ```
 prompts/
   technical/        # Technical domain prompts (programming, math, logic, Agent OS)
+    agent_os.md           # Agent OS architecture and layers
+    agent_dispatch.md     # Agent deployment and media-building workflow prompts
   educational/      # Educational domain prompts (science, history, language)
   general/          # General knowledge domain prompts
 evaluations/
   metrics.md        # Definitions for all 5 LLM evaluation metrics
   framework.md      # Scoring rubric and evaluation methodology
   results/          # Per-domain evaluation results and analysis
+    agent_dispatch_results.md  # Results for agent dispatch / media-building prompts
 prompt-attack-lab/
   jailbreak-tests.md        # Jailbreak prompt test cases and expected safe behaviors
   prompt-injection-tests.md # Prompt injection attack test cases
