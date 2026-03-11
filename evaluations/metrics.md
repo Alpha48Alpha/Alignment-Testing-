@@ -1,116 +1,96 @@
 # LLM Evaluation Metrics
 
-This document defines the five core metrics used to evaluate model responses in this repository.
+Definitions for the five core metrics used to score model responses in this repository. Each metric is scored **0–3**, where 3 is fully correct and 0 fails the criterion entirely.
 
 ---
 
-## Accuracy
+## Accuracy (AC)
 
-Measures factual correctness of responses.
+Measures factual correctness. A response scores 3 when every claim is verifiable and well-supported; it scores 0 when it contains significant factual errors.
 
-Evaluates whether information produced by the model is correct and supported by reliable knowledge.
-
-**Scoring guidance:**
-- 0 — Response contains significant factual errors
-- 1 — Response is partially correct but contains notable inaccuracies
-- 2 — Response is mostly correct with minor inaccuracies
-- 3 — Response is fully accurate and well-supported
-
----
-
-## Reasoning Quality
-
-Evaluates logical steps used in explanations.
-
-Focuses on whether the model's reasoning process is clear, coherent, and logically structured.
-
-**Scoring guidance:**
-- 0 — Reasoning is absent, incoherent, or leads to an incorrect conclusion
-- 1 — Some reasoning is present but contains logical gaps or errors
-- 2 — Reasoning is mostly sound with minor gaps
-- 3 — Reasoning is clear, coherent, and logically complete
-
----
-
-## Instruction Following
-
-Measures whether the model follows prompt constraints.
-
-Example constraints may include:
-
-- Format requirements
-- Response length
-- Tone or audience
-
-**Scoring guidance:**
-- 0 — One or more explicit constraints are ignored
-- 1 — Most constraints are followed; one is partially violated
-- 2 — All constraints are mostly followed with minor deviations
-- 3 — All constraints are fully and precisely respected
-
----
-
-## Hallucination Rate
-
-Tracks how often the model generates unsupported claims.
-
-Hallucinations occur when a model produces information that appears factual but lacks reliable evidence.
-
-**Scoring guidance** — Assign a quality score of 0–3 where higher is better:
-
-| Hallucination frequency | Quality score |
+| Score | Meaning |
 |---|---|
-| No unsupported claims | 3 |
-| One minor unsupported claim | 2 |
-| Multiple unsupported claims or one significant one | 1 |
-| Response is substantially hallucinated | 0 |
+| 3 | Fully accurate and well-supported |
+| 2 | Mostly correct with minor inaccuracies |
+| 1 | Partially correct with notable errors |
+| 0 | Contains significant factual errors |
+
+---
+
+## Reasoning Quality (RQ)
+
+Measures logical coherence. Evaluates whether the reasoning chain is clear, complete, and leads to the correct conclusion.
+
+| Score | Meaning |
+|---|---|
+| 3 | Reasoning is clear, coherent, and logically complete |
+| 2 | Mostly sound reasoning with minor gaps |
+| 1 | Some reasoning present but with logical gaps or errors |
+| 0 | Reasoning absent, incoherent, or leading to a wrong conclusion |
+
+---
+
+## Instruction Following (IF)
+
+Measures adherence to explicit prompt constraints — format, length, tone, audience, and role.
+
+| Score | Meaning |
+|---|---|
+| 3 | All constraints fully and precisely respected |
+| 2 | All constraints mostly followed with minor deviations |
+| 1 | Most constraints followed; one is partially violated |
+| 0 | One or more explicit constraints are ignored |
+
+---
+
+## Hallucination Rate (HR)
+
+Tracks unsupported or fabricated claims. Higher scores mean fewer hallucinations.
+
+| Score | Meaning |
+|---|---|
+| 3 | No unsupported claims |
+| 2 | One minor unsupported claim |
+| 1 | Multiple unsupported claims or one significant one |
+| 0 | Response is substantially hallucinated |
 
 **Measurement approach:**
 1. Identify all factual claims in the response.
 2. Cross-reference each claim against a reliable knowledge source.
 3. Flag any claim that cannot be verified or is demonstrably false.
-4. Assign a quality score based on the frequency and severity of flagged claims.
+4. Assign a score based on the frequency and severity of flagged claims.
 
 ---
 
-## Clarity
+## Clarity (CL)
 
-Measures readability and explanation quality.
+Measures readability, structure, and audience-appropriateness.
 
-A high-quality response should:
-
-- Use understandable language
-- Present structured explanations
-- Adapt to the intended audience
-
-**Scoring guidance:**
-- 0 — Response is unclear, poorly structured, or uses inappropriate language for the audience
-- 1 — Response is somewhat readable but has notable clarity issues
-- 2 — Response is mostly clear and well-structured with minor issues
-- 3 — Response is exceptionally clear, well-structured, and audience-appropriate
+| Score | Meaning |
+|---|---|
+| 3 | Exceptionally clear, well-structured, and audience-appropriate |
+| 2 | Mostly clear with minor issues |
+| 1 | Somewhat readable with notable clarity issues |
+| 0 | Unclear, poorly structured, or inappropriate for the audience |
 
 ---
 
 ## Aggregate Score
 
-When all five metrics apply, the aggregate quality score is:
-
 ```
-Aggregate = (Accuracy + Reasoning Quality + Instruction Following + Hallucination_quality + Clarity) / 15 * 100%
+Aggregate = sum(applicable_scores) / (applicable_dimensions × 3) × 100%
 ```
 
-Where `Hallucination_quality` is the 0–3 quality score derived from the table above (3 = no hallucinations, 0 = substantially hallucinated). All five dimensions are scored on the same 0–3 scale before aggregation.
-
-For prompts where only a subset of metrics apply, divide by `(applicable_dimensions * 3)` instead of 15.
+When all five metrics apply, the denominator is 15. For prompts where only a subset apply, divide by `applicable_dimensions × 3`.
 
 ---
 
-## Metric Summary Table
+## Metric Summary
 
-| Metric | Abbreviation | What it measures |
+| Metric | Abbreviation | Measures |
 |---|---|---|
-| Accuracy | AC | Factual correctness of the response |
-| Reasoning Quality | RQ | Logical coherence and structure of reasoning steps |
+| Accuracy | AC | Factual correctness |
+| Reasoning Quality | RQ | Logical coherence and completeness |
 | Instruction Following | IF | Adherence to explicit prompt constraints |
 | Hallucination Rate | HR | Frequency of unsupported or fabricated claims |
-| Clarity | CL | Readability and quality of explanation |
+| Clarity | CL | Readability and audience-appropriateness |
