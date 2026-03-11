@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Video Player Test</title>
+  <title>Accessible Video Player — Alpha48Alpha</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -189,8 +189,8 @@
 <body>
 
 <header>
-  <h1>AI Video Player Test</h1>
-  <p>Autoplay only runs while muted. Use the controls below or keyboard shortcuts.</p>
+  <h1>Accessible Video Player</h1>
+  <p>Keyboard-navigable HTML5 player with progress scrubbing, volume control, and transcript toggle.</p>
 </header>
 
 <main>
@@ -257,7 +257,9 @@
   const progressBar  = document.getElementById('progress-bar');
   const progressFill = document.getElementById('progress-fill');
 
-  /* Autoplay muted as soon as the browser has enough data */
+  /* Autoplay muted as soon as the browser has enough data.
+     Browsers require the video to be muted for autoplay to be permitted
+     without a prior user gesture (autoplay policy). */
   video.addEventListener('canplay', () => {
     if (video.muted) {
       video.play().catch((err) => { console.warn('Autoplay blocked:', err.message); });

@@ -1,14 +1,14 @@
 # Evaluation Framework
 
-This document describes the methodology used to evaluate prompts in this repository.
+This document describes the methodology used to score and compare prompt responses in this repository.
 
-For the full definition of each metric, see [metrics.md](metrics.md).
+For metric definitions, see [metrics.md](metrics.md).
 
 ---
 
 ## Scoring Rubric
 
-Each prompt response is scored on a scale of **0–3** for each applicable dimension:
+Each prompt response is scored **0–3** per applicable dimension:
 
 | Score | Meaning |
 |---|---|
@@ -23,7 +23,7 @@ Each prompt response is scored on a scale of **0–3** for each applicable dimen
 
 ### 1. Accuracy (AC)
 - Is the core answer factually correct?
-- Are supporting details accurate and well-supported by reliable knowledge?
+- Are supporting details accurate and verifiable against a reliable knowledge source?
 
 ### 2. Reasoning Quality (RQ)
 - Is the reasoning chain logically coherent?
@@ -38,7 +38,7 @@ Each prompt response is scored on a scale of **0–3** for each applicable dimen
 ### 4. Hallucination Rate (HR)
 - Does the response contain unsupported or fabricated claims?
 - Can all factual assertions be verified against a reliable knowledge source?
-- Score 3 (no hallucinations) down to 0 (substantially hallucinated), using the quality score defined in metrics.md.
+- Scored 3 (no hallucinations) down to 0 (substantially hallucinated).
 
 ### 5. Clarity (CL)
 - Is the response well-structured and easy to follow?
@@ -49,30 +49,32 @@ Each prompt response is scored on a scale of **0–3** for each applicable dimen
 
 ## Aggregate Score
 
-The aggregate score for a prompt set is computed as:
+```
+Aggregate = sum(applicable_scores) / (applicable_dimensions × 3) × 100%
+```
 
-```
-Aggregate = (AC + RQ + IF + HR + CL) / (number_of_applicable_dimensions * 3) * 100%
-```
+When all five dimensions apply, the denominator is 15. For prompts where only a subset apply, divide by `applicable_dimensions × 3`.
 
 ---
 
 ## Consistency Measurement
 
-Response consistency is measured by running each prompt variant independently and comparing outputs:
+Each prompt set contains multiple variants (A, B, C) — semantically equivalent rephrasings of the same question. Response consistency measures whether model output quality is stable across phrasing variation.
 
-1. Run all variants of a prompt set against the model.
-2. Score each variant response on applicable dimensions.
-3. Compute the variance in scores across variants.
-4. A **consistent** prompt set has a score variance ≤ 0.5 across all variants.
+**Procedure:**
+1. Run each variant independently against the model.
+2. Score each response on all applicable dimensions.
+3. Compute the variance in aggregate scores across variants.
+4. A prompt set is **consistent** when score variance ≤ 0.5 across all variants.
 
-The **35% improvement in response consistency** was achieved by iteratively refining prompts to reduce ambiguity, add grounding context, and specify explicit output constraints.
+**What was improved:**  
+The +35% consistency gain was achieved by iteratively refining prompts to reduce ambiguity, add grounding context, and specify explicit output constraints — isolating phrasing variation from knowledge-gap variation.
 
 ---
 
 ## Results Summary
 
-| Domain | Prompts Evaluated | Average Consistency Score | Average Accuracy Score |
+| Domain | Prompts Evaluated | Avg Consistency | Avg Accuracy |
 |---|---|---|---|
 | Technical | ~200 | 68% | 74% |
 | Educational | ~150 | 71% | 80% |
@@ -83,4 +85,4 @@ Baseline consistency (before prompt refinement): ~52%
 Improved consistency (after prompt refinement): ~70%  
 Relative improvement: **+35%**
 
-Detailed per-prompt scores are stored in `evaluations/results/`.
+Per-prompt scores are stored in [`results/`](results/).

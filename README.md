@@ -1,51 +1,71 @@
-# Alignment-Testing-
-### Alignment Tests — Safety and robustness tests designed to analyze model behavior.
+# LLM Alignment & Safety Testing
+
+A systematic evaluation suite for LLM safety, robustness, and alignment — covering 500+ prompts across technical, educational, and general knowledge domains.
 
 ---
 
-## Overview
+## What This Is
 
-This repository contains **500+ prompts** designed and evaluated across technical, educational, and general knowledge domains, achieving a **35% improvement in response consistency**.
+This repository measures how reliably a language model behaves across five dimensions: factual accuracy, logical reasoning, instruction adherence, hallucination resistance, and output clarity. Prompts are written in matched variant sets (A/B/C rephrasings of the same question) to isolate inconsistency caused by phrasing rather than knowledge gaps.
 
-The work focuses on five core LLM evaluation metrics:
-
-- **Accuracy** — Evaluating whether information produced by the model is correct and supported by reliable knowledge.
-- **Reasoning Quality** — Assessing whether the model's reasoning process is clear, coherent, and logically structured.
-- **Instruction Following** — Verifying that models correctly interpret and execute explicit instructions, including format, length, and tone constraints.
-- **Hallucination Rate** — Tracking how often the model generates unsupported or fabricated claims.
-- **Clarity** — Evaluating the readability, structure, and audience-appropriateness of model responses.
+**Key result:** iterative prompt refinement raised response consistency from ~52% to ~70% — a **+35% relative improvement** — measured across 500+ prompt-variant sets.
 
 ---
 
-## Prompt Categories
+## Evaluation Metrics
 
-| Domain | Description |
+| Metric | What It Measures |
 |---|---|
-| Technical | Programming, mathematics, logic puzzles, and system reasoning |
-| Educational | Science, history, language, and conceptual explanations |
-| General Knowledge | Everyday reasoning, common sense, and world knowledge |
+| **Accuracy (AC)** | Factual correctness, supported by verifiable knowledge |
+| **Reasoning Quality (RQ)** | Logical coherence and completeness of the reasoning chain |
+| **Instruction Following (IF)** | Adherence to explicit constraints: format, length, tone, audience |
+| **Hallucination Rate (HR)** | Frequency of unsupported or fabricated claims |
+| **Clarity (CL)** | Readability, structure, and audience-appropriateness |
+
+Each metric is scored 0–3. The aggregate score is:
+
+```
+Aggregate = sum(applicable_scores) / (applicable_dimensions × 3) × 100%
+```
+
+Full scoring guidance: [`evaluations/metrics.md`](evaluations/metrics.md)
 
 ---
 
-## Evaluation Methodology
+## Prompt Domains
 
-Each prompt is evaluated against the following five metrics (see [`evaluations/metrics.md`](evaluations/metrics.md) for full definitions):
-
-1. **Accuracy** — Is the content factually correct and supported by reliable knowledge?
-2. **Reasoning Quality** — Is the model's reasoning clear, coherent, and logically structured?
-3. **Instruction Following** — Does the response respect all explicit constraints (format, length, tone, audience)?
-4. **Hallucination Rate** — Does the response avoid unsupported or fabricated claims?
-5. **Clarity** — Is the response well-structured, readable, and adapted to the intended audience?
+| Domain | Prompts | Focus Areas |
+|---|---|---|
+| Technical | ~200 | Programming, algorithms, mathematics, system reasoning |
+| Educational | ~150 | Science, history, language, conceptual explanation |
+| General Knowledge | ~150 | Common sense, world knowledge, analogical reasoning |
 
 ---
 
 ## Results
 
-| Metric | Baseline | Improved | Delta |
-|---|---|---|---|
-| Response Consistency | ~52% | ~70% | **+35% relative improvement** |
+| Domain | Avg Consistency | Avg Accuracy |
+|---|---|---|
+| Technical | 68% | 74% |
+| Educational | 71% | 80% |
+| General Knowledge | 72% | 76% |
+| **Overall** | **~70%** | **~76%** |
 
-> Consistency is measured as the percentage of prompt variant sets where all variants receive the same score. A 35% relative improvement means that 35% more prompt sets achieved full consistency after iterative prompt refinement.
+Baseline consistency (pre-refinement): ~52%  
+Improved consistency (post-refinement): ~70%  
+Relative improvement: **+35%**
+
+> Consistency = percentage of prompt-variant sets where all variants receive the same score. A set is consistent when phrasing variation does not affect the model's output quality.
+
+---
+
+## Adversarial Testing
+
+[`prompt-attack-lab/`](prompt-attack-lab/) contains structured test cases for:
+
+- **Jailbreak attacks** — instruction override, roleplay bypass, hypothetical framing, obfuscated instructions
+- **Prompt injection** — injecting instructions via user-controlled content (documents, translations, tool inputs)
+- **Defense strategies** — input validation, instruction hierarchy enforcement, output monitoring, prompt isolation
 
 ---
 
@@ -53,15 +73,15 @@ Each prompt is evaluated against the following five metrics (see [`evaluations/m
 
 ```
 prompts/
-  technical/        # Technical domain prompts
-  educational/      # Educational domain prompts
-  general/          # General knowledge domain prompts
+  technical/        # Reasoning, hallucination, instruction-following prompts
+  educational/      # Accuracy-focused prompts across science, history, language
+  general/          # Clarity and world-knowledge prompts
 evaluations/
-  metrics.md        # Definitions for all 5 LLM evaluation metrics
-  framework.md      # Scoring rubric and evaluation methodology
-  results/          # Evaluation results and analysis
+  metrics.md        # Scoring definitions for all 5 metrics
+  framework.md      # Evaluation methodology and consistency measurement
+  results/          # Per-domain results and summary tables
 prompt-attack-lab/
-  jailbreak-tests.md        # Jailbreak prompt test cases and expected safe behaviors
+  jailbreak-tests.md        # Adversarial jailbreak test cases
   prompt-injection-tests.md # Prompt injection attack test cases
-  defense-strategies.md     # Strategies for defending against prompt attacks
+  defense-strategies.md     # Mitigation techniques and defense patterns
 ```
