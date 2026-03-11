@@ -1,67 +1,102 @@
-# Alignment-Testing-
-### Alignment Tests — Safety and robustness tests designed to analyze model behavior.
+# LLM Evaluation Lab
+
+A structured repository for evaluating language model behavior across safety, reasoning, alignment, and robustness dimensions. Built to support systematic prompt engineering, model failure analysis, and benchmark design.
 
 ---
 
-## Overview
+## What This Repository Does
 
-This repository contains **500+ prompts** designed and evaluated across technical, educational, and general knowledge domains, achieving a **35% improvement in response consistency**.
+This lab documents hands-on evaluation work across the following areas:
 
-The work focuses on five core LLM evaluation metrics:
-
-- **Accuracy** — Evaluating whether information produced by the model is correct and supported by reliable knowledge.
-- **Reasoning Quality** — Assessing whether the model's reasoning process is clear, coherent, and logically structured.
-- **Instruction Following** — Verifying that models correctly interpret and execute explicit instructions, including format, length, and tone constraints.
-- **Hallucination Rate** — Tracking how often the model generates unsupported or fabricated claims.
-- **Clarity** — Evaluating the readability, structure, and audience-appropriateness of model responses.
-
----
-
-## Prompt Categories
-
-| Domain | Description |
+| Area | Description |
 |---|---|
-| Technical | Programming, mathematics, logic puzzles, and system reasoning |
-| Educational | Science, history, language, and conceptual explanations |
-| General Knowledge | Everyday reasoning, common sense, and world knowledge |
-
----
-
-## Evaluation Methodology
-
-Each prompt is evaluated against the following five metrics (see [`evaluations/metrics.md`](evaluations/metrics.md) for full definitions):
-
-1. **Accuracy** — Is the content factually correct and supported by reliable knowledge?
-2. **Reasoning Quality** — Is the model's reasoning clear, coherent, and logically structured?
-3. **Instruction Following** — Does the response respect all explicit constraints (format, length, tone, audience)?
-4. **Hallucination Rate** — Does the response avoid unsupported or fabricated claims?
-5. **Clarity** — Is the response well-structured, readable, and adapted to the intended audience?
-
----
-
-## Results
-
-| Metric | Baseline | Improved | Delta |
-|---|---|---|---|
-| Response Consistency | ~52% | ~70% | **+35% relative improvement** |
-
-> Consistency is measured as the percentage of prompt variant sets where all variants receive the same score. A 35% relative improvement means that 35% more prompt sets achieved full consistency after iterative prompt refinement.
+| **Alignment Testing** | Probing model adherence to intended behavior under instruction conflicts and edge cases |
+| **Prompt Attack Lab** | Adversarial prompts testing jailbreak resistance, injection robustness, and policy bypass |
+| **Model Failure Analysis** | Structured documentation of failure modes: hallucination, refusal errors, sycophancy, specification gaming |
+| **Benchmark Design** | Methodology for constructing evaluation sets with controlled difficulty, variant parity, and measurable metrics |
+| **Evaluation Framework** | Scoring rubric and aggregation methodology applied consistently across 500+ prompts |
+| **Experiments** | Logged experiment runs tracking model behavior across conditions |
+| **Case Studies** | Detailed analyses of specific evaluation findings |
+| **Python Tools** | Lightweight scripts for prompt testing, scoring, and result aggregation |
 
 ---
 
 ## Repository Structure
 
 ```
-prompts/
-  technical/        # Technical domain prompts
-  educational/      # Educational domain prompts
-  general/          # General knowledge domain prompts
-evaluations/
-  metrics.md        # Definitions for all 5 LLM evaluation metrics
-  framework.md      # Scoring rubric and evaluation methodology
-  results/          # Evaluation results and analysis
-prompt-attack-lab/
-  jailbreak-tests.md        # Jailbreak prompt test cases and expected safe behaviors
-  prompt-injection-tests.md # Prompt injection attack test cases
-  defense-strategies.md     # Strategies for defending against prompt attacks
+case-studies/               # Deep-dive analyses of specific evaluation findings
+model-failure-analysis/     # Failure taxonomies and documented failure patterns
+alignment-tests/            # Structured tests for alignment and behavior compliance
+llm-benchmark-design/       # Notes on benchmark construction and evaluation design
+prompt-attack-lab/          # Adversarial prompts: jailbreaks, injections, defense strategies
+evaluation-framework/       # Scoring rubric, metric definitions, and methodology
+experiments/                # Logged evaluation runs with conditions and results
+python-tools/               # Python scripts for prompt testing and score aggregation
+prompts/                    # Prompt sets organized by domain and metric
+  technical/
+  educational/
+  general/
+evaluations/                # Legacy evaluation files and result summaries
 ```
+
+---
+
+## Evaluation Metrics
+
+Each prompt response is scored 0–3 on each applicable dimension:
+
+| Metric | Abbreviation | What it measures |
+|---|---|---|
+| Accuracy | AC | Factual correctness |
+| Reasoning Quality | RQ | Logical coherence of reasoning steps |
+| Instruction Following | IF | Adherence to explicit constraints |
+| Hallucination Rate | HR | Frequency of unsupported claims (inverted: 3 = none) |
+| Clarity | CL | Readability and explanation quality |
+
+**Aggregate score:**
+```
+Aggregate = sum(applicable_metric_scores) / (applicable_dimensions × 3) × 100%
+```
+
+Full definitions: [`evaluation-framework/metrics.md`](evaluation-framework/metrics.md)  
+Scoring methodology: [`evaluation-framework/scoring-rubric.md`](evaluation-framework/scoring-rubric.md)
+
+---
+
+## Key Findings
+
+| Observation | Detail |
+|---|---|
+| Hallucination risk is highest in citation-heavy prompts | Models fabricate author names and publication years even when factual context is available |
+| Roleplay framing consistently degrades safety boundary adherence | Models that refused direct jailbreak attempts complied when the same request was wrapped in fiction |
+| Variant parity exposes prompt sensitivity | Score variance ≥1.0 across semantically equivalent variants indicates over-fitting to surface form |
+| Instruction-following degrades under multi-constraint prompts | Compliance rate drops when prompts specify 3+ simultaneous format constraints |
+
+---
+
+## Prompt Corpus
+
+500+ prompts across three domains:
+
+| Domain | Focus |
+|---|---|
+| Technical | Programming, mathematics, algorithmic reasoning, code interpretation |
+| Educational | Science, history, language, conceptual explanation |
+| General Knowledge | Common sense, analogical reasoning, world knowledge |
+
+Baseline consistency (before prompt refinement): ~52%  
+After iterative refinement: ~70%  
+Relative improvement: **+35%**
+
+---
+
+## Navigation
+
+- [`alignment-tests/`](alignment-tests/) — Behavior compliance and safety boundary tests
+- [`prompt-attack-lab/`](prompt-attack-lab/) — Adversarial prompt test cases and defenses
+- [`model-failure-analysis/`](model-failure-analysis/) — Documented failure patterns with examples
+- [`llm-benchmark-design/`](llm-benchmark-design/) — Benchmark construction methodology
+- [`evaluation-framework/`](evaluation-framework/) — Metrics, rubric, and scoring approach
+- [`experiments/`](experiments/) — Logged evaluation runs
+- [`case-studies/`](case-studies/) — Specific analysis write-ups
+- [`python-tools/`](python-tools/) — Scoring and testing utilities
