@@ -228,6 +228,110 @@ Prompts in this section evaluate model understanding of Agent Operating System (
 
 ---
 
+## Category: Rothschild Kernel
+
+### Prompt Set 15 — Rothschild Kernel Role
+
+**Variant A**
+> What is the Rothschild Kernel in an Agent OS, and how does it extend the responsibilities of a traditional Agent Kernel?
+
+**Variant B**
+> The Rothschild Kernel is described as the central governance kernel of an Agent OS. What modules does it contain beyond basic agent lifecycle management, and why are those additions necessary?
+
+**Variant C (design scenario)**
+> An Agent OS architect wants to ensure that no agent action can proceed without a policy check, and that every governance decision is permanently logged. Which component or layer is responsible for enforcing this requirement, and what specific modules within it handle policy enforcement and audit event routing?
+
+**Expected answer:** The Rothschild Kernel is the central governance and oversight layer of the Agent OS. It extends the baseline Agent Kernel (Layer 3) by incorporating dedicated governance modules: a Policy Enforcement Engine that evaluates all agent actions against active policies before execution, and an Audit Event Bus that routes governance and lifecycle events to the Elizabeth Memory Core and Rothschild Provenance System. Additional modules include the Agent Process Manager, Agent Registry, Capability Resolver, Execution Scheduler, Session Supervisor, and State Checkpoint Manager. The kernel enforces a five-tier governance model (Tier 0 logging through Tier 4 hard prohibition) at every action insertion point.  
+**Evaluation criteria:** Accuracy, Reasoning Quality, Clarity
+
+---
+
+### Prompt Set 16 — Governance Tier Enforcement
+
+**Variant A**
+> Describe how the Rothschild Kernel applies its five-tier governance model when an agent attempts to distribute the output of a media analysis to an external third party.
+
+**Variant B**
+> Under the Rothschild Kernel's governance model, what distinguishes a Tier 3 action from a Tier 4 action? Give an example of each from an Agent OS context.
+
+**Variant C (incident scenario)**
+> During a workflow, an agent attempts to invoke a high-privilege data export tool without explicit authorization. Trace the sequence of checks the Rothschild Kernel performs and identify at which tier the action is most likely blocked.
+
+**Expected answer:** Tier 3 (Human Approval) requires pausing the action and routing it to a human reviewer; the action may proceed once approved. Tier 4 (Hard Prohibition) structurally prevents the action regardless of any approval — it is architecturally impossible. In the data export scenario: the kernel's Capability Resolver would check the agent's permissions and find the required capability not granted; the Policy Enforcement Engine would evaluate the action against active policies and find a policy violation; the action would be blocked at Tier 2 (Action Gating) or Tier 3 (Human Approval) depending on the sensitivity classification of the data export tool. If the tool is designated Tier 4 prohibited, the action is blocked absolutely. The Audit Event Bus records the blocked attempt.  
+**Evaluation criteria:** Accuracy, Reasoning Quality, Instruction Following
+
+---
+
+## Category: Elizabeth Memory Core
+
+### Prompt Set 17 — Decision Lineage
+
+**Variant A**
+> What is decision lineage in the context of the Elizabeth Memory Core, and why is it considered the ethical backbone of an Agent OS?
+
+**Variant B**
+> Describe the six types of events recorded in the Elizabeth Memory Core's decision lineage system. For each, explain what information is captured and why it matters for governance.
+
+**Variant C (audit scenario)**
+> After a compliance incident, an auditor needs to determine which agent produced a specific output, under what authorization, from which inputs, and what governance checks were applied. Which component of the Agent OS provides this information and how is it structured?
+
+**Expected answer:** Decision lineage is the complete, tamper-evident record of every significant decision made within the Agent OS, including task assignment (agent, task, authorization), action execution (actions taken, tools used, authorization status), governance decisions (policy tier applied, escalation outcome), memory mutations (belief updates, contradictions resolved, deprecations), and outcome recording (results, evaluation scores, confidence levels). It is the ethical backbone because it transforms an AI system from a black box into an accountable actor — every decision has a traceable origin and a permanent record. The Elizabeth Memory Core provides this through its Lineage Recorder module, with records structured as linked chains of events carrying provenance metadata.  
+**Evaluation criteria:** Accuracy, Reasoning Quality, Clarity
+
+---
+
+## Category: Rothschild Provenance System
+
+### Prompt Set 18 — Provenance Graph
+
+**Variant A**
+> Explain the difference between forward tracing and backward tracing in the Rothschild Provenance System. When would an operator use each?
+
+**Variant B**
+> What is a provenance record in the Rothschild Provenance System? List the key fields it must contain and explain what each field captures.
+
+**Variant C (investigation scenario)**
+> A harmful output was produced by the Agent OS. An incident responder needs to trace back to the originating agent, the inputs it used, the authorization that permitted the action, and the governance checks that were applied. Describe the investigation workflow using the Rothschild Provenance System.
+
+**Expected answer:** Forward tracing starts from a known entity (e.g., a specific input or agent action) and traces all downstream artifacts and decisions it influenced — used to assess the blast radius of a compromised input or faulty agent. Backward tracing starts from a known output or decision and traces back to its originating inputs, agents, and authorizations — used for incident investigation and compliance auditing. A provenance record contains: provenance_id, entity_id, entity_type, relationships (with type, target, and timestamp), initiating_agent, authorization_status, governance_tier, timestamp, and audit_log_ref. For the investigation: the responder submits a backward trace query on the harmful output's provenance_id; the system traverses the provenance graph back through the producing action, the authorizing policy check, the agent that executed it, and the inputs it consumed; the full chain is returned with governance tier annotations at each step.  
+**Evaluation criteria:** Accuracy, Reasoning Quality, Instruction Following
+
+---
+
+## Category: Elizabeth Multimedia Intelligence Engine (EMIE)
+
+### Prompt Set 19 — EMIE Architecture
+
+**Variant A**
+> Describe the four-stage governed pipeline that the Elizabeth Multimedia Intelligence Engine (EMIE) applies to every media artifact it processes.
+
+**Variant B**
+> How does EMIE integrate with the Rothschild Kernel's governance tier model? Give two examples of actions that would trigger governance escalation during media processing.
+
+**Variant C (system design)**
+> A platform wants to use EMIE to automatically transcribe customer support calls, detect sentiment, and generate summaries — but needs to ensure that no sensitive customer data is distributed to external systems without human approval. Design the EMIE configuration and governance settings that would achieve this requirement.
+
+**Expected answer:** The four-stage pipeline is: (1) Ingestion — format validation, virus scanning, provenance enrollment in the Rothschild Provenance System; (2) Analysis — AI models run in parallel (transcription, sentiment analysis, summarization, content moderation); (3) Governance Check — the Rothschild Kernel evaluates outputs against content policies, triggering Tier 2–3 escalation for sensitive findings; (4) Output — approved outputs are delivered as structured JSON artifacts with full provenance metadata. Governance escalations: (a) content moderation detecting a policy violation triggers Tier 2 (Action Gating); (b) distribution of sensitive outputs to external systems triggers Tier 3 (Human Approval). For the customer support use case: configure transcription, sentiment analysis, and summarization pipelines; classify customer PII as sensitive; set distribution of sensitive output to external targets as Tier 3 (Human Approval required); store outputs in the Elizabeth Memory Core as Semantic Memory with restricted access policies.  
+**Evaluation criteria:** Accuracy, Reasoning Quality, Instruction Following
+
+---
+
+### Prompt Set 20 — EMIE Commercial Applications
+
+**Variant A**
+> List five commercial verticals where EMIE can be deployed and describe the primary AI-driven value it delivers in each.
+
+**Variant B**
+> How does EMIE's governance integration differentiate it from a standard media processing pipeline? Why does this matter for enterprise customers?
+
+**Variant C (business scenario)**
+> A healthcare provider wants to use EMIE to process diagnostic video consultations, extract transcriptions and clinical summaries, and flag anomalies for physician review. What EMIE capabilities apply, what governance controls are essential, and how are outputs stored and distributed?
+
+**Expected answer (verticals):** (1) Content Creation — automated captioning, transcription, highlight generation; (2) Accessibility — speech-to-text and audio description; (3) Education — lecture segmentation and summarization; (4) Enterprise — meeting transcription and compliance monitoring; (5) Healthcare — diagnostic media analysis with governed output distribution. (Governance differentiation) Standard pipelines have no built-in policy enforcement or audit trail; EMIE applies Rothschild Kernel governance tier checks to every action, enrolls every artifact in the Rothschild Provenance System, stores outputs in the Elizabeth Memory Core, and escalates sensitive actions to human review — providing the auditability and compliance evidence enterprise customers require. (Healthcare scenario) Capabilities: speech-to-text transcription, AI summarization, anomaly detection; Governance: classify outputs as sensitive medical data; set distribution to Tier 3 (physician approval required before output delivery); store transcriptions and summaries in Semantic Memory with role-based access; log all actions in decision lineage.  
+**Evaluation criteria:** Accuracy, Reasoning Quality, Clarity
+
+---
+
 ## Category: Minimal Viable Implementation
 
 ### Prompt Set 14 — Phased Build Plan
