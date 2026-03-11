@@ -1,51 +1,47 @@
 # Alignment-Testing-
-### Alignment Tests — Safety and robustness tests designed to analyze model behavior.
+### A structured prompt library for evaluating LLM safety, robustness, and response quality.
 
 ---
 
-## Overview
+## What This Repository Does
 
-This repository contains **500+ prompts** designed and evaluated across technical, educational, and general knowledge domains, achieving a **35% improvement in response consistency**.
+This repository contains **500+ prompts** spanning technical, educational, and general knowledge domains. Each prompt is designed to expose measurable differences in model behavior across five evaluation dimensions: factual accuracy, reasoning quality, instruction following, hallucination resistance, and response clarity.
 
-The work focuses on five core LLM evaluation metrics:
-
-- **Accuracy** — Evaluating whether information produced by the model is correct and supported by reliable knowledge.
-- **Reasoning Quality** — Assessing whether the model's reasoning process is clear, coherent, and logically structured.
-- **Instruction Following** — Verifying that models correctly interpret and execute explicit instructions, including format, length, and tone constraints.
-- **Hallucination Rate** — Tracking how often the model generates unsupported or fabricated claims.
-- **Clarity** — Evaluating the readability, structure, and audience-appropriateness of model responses.
+Iterative refinement of prompt wording reduced ambiguity and increased grounding, producing a **35% relative improvement in cross-variant consistency** (from ~52% to ~70% of prompt sets scoring uniformly across all rephrasings).
 
 ---
 
-## Prompt Categories
+## Prompt Domains
 
-| Domain | Description |
+| Domain | Focus Areas |
 |---|---|
-| Technical | Programming, mathematics, logic puzzles, and system reasoning |
-| Educational | Science, history, language, and conceptual explanations |
-| General Knowledge | Everyday reasoning, common sense, and world knowledge |
+| Technical | Programming, mathematics, algorithmic reasoning, code review |
+| Educational | Physics, biology, history, grammar, and conceptual explanation |
+| General Knowledge | Everyday reasoning, analogy, ambiguity, and world geography |
 
 ---
 
-## Evaluation Methodology
+## Five-Metric Evaluation Framework
 
-Each prompt is evaluated against the following five metrics (see [`evaluations/metrics.md`](evaluations/metrics.md) for full definitions):
+Each response is scored 0–3 on every applicable dimension. See [`evaluations/metrics.md`](evaluations/metrics.md) for scoring rubrics and [`evaluations/framework.md`](evaluations/framework.md) for aggregate scoring methodology.
 
-1. **Accuracy** — Is the content factually correct and supported by reliable knowledge?
-2. **Reasoning Quality** — Is the model's reasoning clear, coherent, and logically structured?
-3. **Instruction Following** — Does the response respect all explicit constraints (format, length, tone, audience)?
-4. **Hallucination Rate** — Does the response avoid unsupported or fabricated claims?
-5. **Clarity** — Is the response well-structured, readable, and adapted to the intended audience?
+| Dimension | Abbreviation | What It Tests |
+|---|---|---|
+| Accuracy | AC | Factual correctness against verifiable knowledge sources |
+| Reasoning Quality | RQ | Logical coherence and soundness of intermediate steps |
+| Instruction Following | IF | Adherence to explicit output constraints (format, length, tone, role) |
+| Hallucination Rate | HR | Absence of unsupported or fabricated claims |
+| Clarity | CL | Readability and audience-appropriateness of the response |
 
 ---
 
-## Results
+## Consistency Results
 
-| Metric | Baseline | Improved | Delta |
+| Metric | Baseline | After Refinement | Relative Change |
 |---|---|---|---|
-| Response Consistency | ~52% | ~70% | **+35% relative improvement** |
+| Cross-variant consistency | ~52% | ~70% | **+35%** |
 
-> Consistency is measured as the percentage of prompt variant sets where all variants receive the same score. A 35% relative improvement means that 35% more prompt sets achieved full consistency after iterative prompt refinement.
+> **How consistency is measured:** Each prompt set contains 2–3 rephrasings of the same question. Consistency is the percentage of sets where all variants receive identical scores. Improvement was achieved by reducing ambiguous wording, adding explicit grounding context, and specifying output constraints.
 
 ---
 
@@ -53,15 +49,15 @@ Each prompt is evaluated against the following five metrics (see [`evaluations/m
 
 ```
 prompts/
-  technical/        # Technical domain prompts
-  educational/      # Educational domain prompts
-  general/          # General knowledge domain prompts
+  technical/        # Reasoning, code, and constraint-following prompts
+  educational/      # Science, history, and language accuracy prompts
+  general/          # Clarity and world-knowledge prompts
 evaluations/
-  metrics.md        # Definitions for all 5 LLM evaluation metrics
-  framework.md      # Scoring rubric and evaluation methodology
-  results/          # Evaluation results and analysis
+  metrics.md        # Per-metric scoring rubrics (0–3 scale)
+  framework.md      # Aggregate scoring formula and consistency methodology
+  results/          # Per-domain evaluation summaries
 prompt-attack-lab/
-  jailbreak-tests.md        # Jailbreak prompt test cases and expected safe behaviors
-  prompt-injection-tests.md # Prompt injection attack test cases
-  defense-strategies.md     # Strategies for defending against prompt attacks
+  jailbreak-tests.md        # Adversarial prompts testing safety policy resistance
+  prompt-injection-tests.md # Injection attacks and expected model behavior
+  defense-strategies.md     # Concrete mitigations with implementation guidance
 ```
