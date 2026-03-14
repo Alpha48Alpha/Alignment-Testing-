@@ -151,6 +151,57 @@
       font-size: 0.75rem;
     }
 
+    /* ── Live Apps ────────────────────────────────────────── */
+    #live-apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .app-card {
+      background: var(--surface);
+      border: 1px solid #f26207;
+      border-radius: 8px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      transition: box-shadow 0.2s;
+    }
+
+    .app-card:hover {
+      box-shadow: 0 0 0 2px #f26207;
+    }
+
+    .app-card .app-name {
+      color: #f26207;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      word-break: break-word;
+    }
+
+    .app-card .app-name:hover { text-decoration: underline; }
+
+    .app-card .description {
+      color: var(--muted);
+      font-size: 0.875rem;
+      flex: 1;
+    }
+
+    .replit-badge {
+      display: inline-block;
+      background: #f26207;
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      border-radius: 12px;
+      padding: 1px 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
     /* ── Featured Repos ───────────────────────────────────── */
     #featured-grid {
       display: grid;
@@ -238,6 +289,27 @@
 </header>
 
 <main>
+  <h2 class="section-title">Live Apps on Replit</h2>
+  <div id="live-apps-grid" role="list" aria-label="Live Replit applications">
+    <article class="app-card" role="listitem">
+      <span class="replit-badge">Replit Live</span>
+      <a class="app-name"
+         href="replit-apps/index.html"
+         aria-label="View Replit apps showcase">
+        Replit Apps
+      </a>
+      <p class="description">
+        Live web applications deployed on Replit. Click to open the showcase
+        page where you can preview each app directly in the browser.
+      </p>
+      <div class="repo-meta">
+        <span class="tag">web-app</span>
+        <span class="tag">live</span>
+        <span class="tag">replit</span>
+      </div>
+    </article>
+  </div>
+
   <h2 class="section-title">Featured Repositories</h2>
   <div id="featured-grid" role="list" aria-label="Featured repositories">
     <article class="featured-card" role="listitem">
