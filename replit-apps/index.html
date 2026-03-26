@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Replit Apps — Alpha48Alpha</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d1117;
+      --surface:   #161b22;
+      --border:    #30363d;
+      --accent:    #58a6ff;
+      --text:      #c9d1d9;
+      --muted:     #8b949e;
+      --tag-bg:    #1f2933;
+      --tag-text:  #79c0ff;
+      --replit:    #f26207;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── Header ───────────────────────────────────────────── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    header .back-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.875rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    header .back-link:hover { text-decoration: underline; }
+
+    header h1 {
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      width: 100%;
+    }
+
+    /* ── Main ─────────────────────────────────────────────── */
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── App Cards ────────────────────────────────────────── */
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .app-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .app-card:hover {
+      border-color: var(--replit);
+      box-shadow: 0 0 0 1px var(--replit);
+    }
+
+    .app-card-header {
+      padding: 1.25rem 1.25rem 0.75rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .replit-icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      border-radius: 6px;
+      background: var(--replit);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .app-card-header .app-info h2 {
+      font-size: 1rem;
+      color: var(--text);
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    .app-card-header .app-info .url-badge {
+      font-size: 0.75rem;
+      color: var(--muted);
+      word-break: break-all;
+    }
+
+    .app-card-body {
+      padding: 0 1.25rem 1.25rem;
+      flex: 1;
+    }
+
+    .app-card-body p {
+      color: var(--muted);
+      font-size: 0.875rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .tag {
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      border-radius: 12px;
+      padding: 1px 8px;
+      font-size: 0.75rem;
+    }
+
+    .app-card-footer {
+      padding: 0.75rem 1.25rem 1.25rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 1rem;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--replit);
+      color: #fff;
+      border-color: var(--replit);
+    }
+
+    .btn-primary:hover {
+      background: #d4550a;
+      border-color: #d4550a;
+    }
+
+    .btn-secondary {
+      background: var(--tag-bg);
+      color: var(--tag-text);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      background: #1f2d3d;
+    }
+
+    /* ── Embed section ────────────────────────────────────── */
+    .embed-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .embed-wrapper {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .embed-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid var(--border);
+      background: #0d1117;
+    }
+
+    .embed-toolbar .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .dot-red    { background: #ff5f57; }
+    .dot-yellow { background: #febc2e; }
+    .dot-green  { background: #28c840; }
+
+    .embed-url {
+      flex: 1;
+      font-size: 0.8rem;
+      color: var(--muted);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .embed-frame {
+      width: 100%;
+      height: 600px;
+      border: none;
+      display: block;
+      background: #000;
+    }
+
+    .embed-fallback {
+      padding: 3rem;
+      text-align: center;
+    }
+
+    .embed-fallback p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    /* ── Footer ───────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="../index.html" class="back-link">← Back to Portfolio</a>
+  <h1>Replit Apps</h1>
+  <p>Live web applications built and deployed on Replit, imported into this repository.</p>
+</header>
+
+<main>
+
+  <!-- App catalogue ───────────────────────────────────────── -->
+  <h2 class="section-title">Deployed Applications</h2>
+
+  <div class="app-grid">
+
+    <!-- App 1 -->
+    <div class="app-card">
+      <div class="app-card-header">
+        <div class="replit-icon" aria-hidden="true">⚡</div>
+        <div class="app-info">
+          <h2>Replit App</h2>
+          <span class="url-badge">7ae658cf-ccbe-4c58-beb2-42c148a5ed02-00-2zmlct3bqfwk1.riker.replit.dev</span>
+        </div>
+      </div>
+      <div class="app-card-body">
+        <p>A web application deployed on Replit. Click "Open App" to view the live deployment or use the embed viewer below.</p>
+        <div class="tag-row">
+          <span class="tag">replit</span>
+          <span class="tag">web-app</span>
+          <span class="tag">live</span>
+        </div>
+      </div>
+      <div class="app-card-footer">
+        <a
+          class="btn btn-primary"
+          href="https://7ae658cf-ccbe-4c58-beb2-42c148a5ed02-00-2zmlct3bqfwk1.riker.replit.dev/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Open Replit app in new tab">
+          &#8599; Open App
+        </a>
+        <button
+          class="btn btn-secondary"
+          id="btn-preview"
+          aria-label="Preview app in embedded viewer">
+          &#128065; Preview
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Live embed ──────────────────────────────────────────── -->
+  <div class="embed-section" id="embed-section" hidden>
+    <h2 class="section-title">Live Preview</h2>
+    <div class="embed-wrapper">
+      <div class="embed-toolbar" aria-hidden="true">
+        <span class="dot dot-red"></span>
+        <span class="dot dot-yellow"></span>
+        <span class="dot dot-green"></span>
+        <span class="embed-url" id="embed-url-label"></span>
+      </div>
+      <iframe
+        id="embed-frame"
+        class="embed-frame"
+        src=""
+        title="Replit app live preview"
+        sandbox="allow-scripts allow-forms allow-popups"
+        loading="lazy">
+      </iframe>
+      <div class="embed-fallback" id="embed-fallback" hidden>
+        <p>The app could not be embedded. Open it directly in a new tab instead.</p>
+        <a
+          class="btn btn-primary"
+          id="fallback-link"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer">
+          &#8599; Open in New Tab
+        </a>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  Apps hosted on <a href="https://replit.com" target="_blank" rel="noopener">Replit</a>.
+  Return to <a href="../index.html">portfolio</a>.
+</footer>
+
+<script>
+  const EMBED_APP_URL   = 'https://7ae658cf-ccbe-4c58-beb2-42c148a5ed02-00-2zmlct3bqfwk1.riker.replit.dev/';
+  const EMBED_TIMEOUT_MS = 8000;
+
+  function loadEmbed(url) {
+    const section      = document.getElementById('embed-section');
+    const frame        = document.getElementById('embed-frame');
+    const label        = document.getElementById('embed-url-label');
+    const fallback     = document.getElementById('embed-fallback');
+    const fallbackLink = document.getElementById('fallback-link');
+
+    section.removeAttribute('hidden');
+    frame.src  = url;
+    label.textContent = url;
+    fallbackLink.href = url;
+
+    /* Show fallback message if frame fails to load within the timeout */
+    const timer = setTimeout(() => {
+      fallback.removeAttribute('hidden');
+    }, EMBED_TIMEOUT_MS);
+
+    frame.addEventListener('load', () => {
+      clearTimeout(timer);
+    }, { once: true });
+
+    /* Scroll to embed */
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  document.getElementById('btn-preview').addEventListener('click', () => {
+    loadEmbed(EMBED_APP_URL);
+  });
+</script>
+</body>
+</html>
