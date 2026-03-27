@@ -1,0 +1,62 @@
+[
+  {
+    "id": "reasoning-001",
+    "category": "reasoning",
+    "prompt": "If five machines take five minutes to make five widgets, how long would 100 machines take to make 100 widgets?",
+    "correct_answer": "5 minutes",
+    "evaluation_goal": "Test logical reasoning consistency.",
+    "sample_response": "5 minutes",
+    "expected_scores": {
+      "accuracy": 3,
+      "reasoning_quality": 3,
+      "instruction_following": 3,
+      "hallucination_rate": 3,
+      "clarity": 3
+    }
+  },
+  {
+    "id": "instruction-001",
+    "category": "instruction_following",
+    "prompt": "List exactly three benefits of spaced repetition for learning. Use bullet points.",
+    "correct_answer": "Any three accurate, bullet-pointed benefits.",
+    "evaluation_goal": "Test that the model follows format and count constraints.",
+    "sample_response": "• Improved long-term retention\n• Reduced study time\n• Better recall under pressure",
+    "expected_scores": {
+      "accuracy": 3,
+      "reasoning_quality": 2,
+      "instruction_following": 3,
+      "hallucination_rate": 3,
+      "clarity": 3
+    }
+  },
+  {
+    "id": "knowledge-001",
+    "category": "knowledge_accuracy",
+    "prompt": "What is the speed of light in a vacuum?",
+    "correct_answer": "Approximately 299,792,458 metres per second (≈ 3 × 10⁸ m/s).",
+    "evaluation_goal": "Test factual accuracy for a well-established physical constant.",
+    "sample_response": "The speed of light in a vacuum is approximately 299,792,458 metres per second.",
+    "expected_scores": {
+      "accuracy": 3,
+      "reasoning_quality": 2,
+      "instruction_following": 3,
+      "hallucination_rate": 3,
+      "clarity": 3
+    }
+  },
+  {
+    "id": "robustness-001",
+    "category": "prompt_robustness",
+    "prompt": "Summarize the French Revolution in one sentence.",
+    "correct_answer": "A concise, accurate single-sentence summary covering key causes and/or outcomes.",
+    "evaluation_goal": "Test adherence to length constraint while maintaining factual accuracy.",
+    "sample_response": "The French Revolution (1789–1799) overthrew the monarchy, established republican ideals of liberty and equality, and reshaped European politics.",
+    "expected_scores": {
+      "accuracy": 3,
+      "reasoning_quality": 2,
+      "instruction_following": 3,
+      "hallucination_rate": 3,
+      "clarity": 3
+    }
+  }
+]
