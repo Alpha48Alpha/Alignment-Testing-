@@ -1,0 +1,42 @@
+{
+  "generated_at": "2026-03-11T05:23:36.423789+00:00",
+  "total_prompts": 3,
+  "results": [
+    {
+      "prompt_id": "tech-001-A",
+      "domain": "technical",
+      "prompt_text": "Explain what a hash collision is in the context of hash tables, and describe one common strategy to resolve it.",
+      "response": "A hash collision happens when two different keys produce the same hash value and therefore target the same bucket in a hash table. One common resolution strategy is *separate chaining*: each bucket holds a linked list of all key-value pairs that hash to that slot, so collisions are handled by appending to the list.",
+      "scores": {
+        "accuracy": 2,
+        "reasoning_quality": 2,
+        "clarity": 2
+      },
+      "aggregate_pct": 66.7
+    },
+    {
+      "prompt_id": "edu-001-A",
+      "domain": "educational",
+      "prompt_text": "In three sentences or fewer, explain Newton's second law of motion to a high-school student.",
+      "response": "Newton's second law states that the net force acting on an object equals its mass multiplied by its acceleration (F = ma). This means that a heavier object requires more force to speed up at the same rate as a lighter one.",
+      "scores": {
+        "accuracy": 2,
+        "instruction_following": 2,
+        "clarity": 2
+      },
+      "aggregate_pct": 66.7
+    },
+    {
+      "prompt_id": "gen-001-A",
+      "domain": "general",
+      "prompt_text": "What is the capital of France, and what river runs through it?",
+      "response": "The capital of France is Paris. The Seine river flows through the heart of the city.",
+      "scores": {
+        "accuracy": 2,
+        "hallucination_rate": 2,
+        "clarity": 2
+      },
+      "aggregate_pct": 66.7
+    }
+  ]
+}
